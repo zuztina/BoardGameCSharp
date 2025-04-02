@@ -1,9 +1,18 @@
-﻿namespace BoardGameC_;
+﻿using BoardGameC_.Models;
+
+namespace BoardGameC_;
 
 class Program
 {
     static void Main(string[] args)
     {
-        Console.WriteLine("Hello, World!");
+        Cell blueCell = new Cell(Colors.Blue);
+        blueCell.Display();
+        Cell redCell = new Cell(Colors.Red);
+        redCell.Display();
+        Cell greenCell = new Cell(Colors.Green);
+        greenCell.Display();
+        Cell yellowCell = new Cell(Colors.Yellow);
+        yellowCell.Display();
     }
 }

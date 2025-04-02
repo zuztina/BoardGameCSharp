@@ -1,0 +1,14 @@
+/home/tinka/C#Projekt/BoardGameC#/bin/Debug/net8.0/BoardGameC#
+/home/tinka/C#Projekt/BoardGameC#/bin/Debug/net8.0/BoardGameC#.deps.json
+/home/tinka/C#Projekt/BoardGameC#/bin/Debug/net8.0/BoardGameC#.runtimeconfig.json
+/home/tinka/C#Projekt/BoardGameC#/bin/Debug/net8.0/BoardGameC#.dll
+/home/tinka/C#Projekt/BoardGameC#/bin/Debug/net8.0/BoardGameC#.pdb
+/home/tinka/C#Projekt/BoardGameC#/obj/Debug/net8.0/BoardGameC#.GeneratedMSBuildEditorConfig.editorconfig
+/home/tinka/C#Projekt/BoardGameC#/obj/Debug/net8.0/BoardGameC#.AssemblyInfoInputs.cache
+/home/tinka/C#Projekt/BoardGameC#/obj/Debug/net8.0/BoardGameC#.AssemblyInfo.cs
+/home/tinka/C#Projekt/BoardGameC#/obj/Debug/net8.0/BoardGameC#.csproj.CoreCompileInputs.cache
+/home/tinka/C#Projekt/BoardGameC#/obj/Debug/net8.0/BoardGameC#.dll
+/home/tinka/C#Projekt/BoardGameC#/obj/Debug/net8.0/refint/BoardGameC#.dll
+/home/tinka/C#Projekt/BoardGameC#/obj/Debug/net8.0/BoardGameC#.pdb
+/home/tinka/C#Projekt/BoardGameC#/obj/Debug/net8.0/BoardGameC#.genruntimeconfig.cache
+/home/tinka/C#Projekt/BoardGameC#/obj/Debug/net8.0/ref/BoardGameC#.dll
