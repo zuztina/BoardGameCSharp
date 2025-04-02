@@ -25,7 +25,24 @@ namespace BoardGameC_.Models
 
         public void Display(){
             Console.ForegroundColor = ColorMap[Color];
-            Console.Write("⬤\n");
+            if (!IsOccupied){
+                Console.Write("⬤\n");
+            }
+            else{
+                Console.Write("◯\n");
+            }
+            
+        }
+
+        public void PrintCell(){
+            Console.WriteLine($"Cell color: {Color}");
+            Console.WriteLine($"Cell row: {Row}");
+            Console.WriteLine($"Cell column: {Column}");
+            Console.WriteLine($"Cell state: {IsOccupied}");
+        }
+
+        public void ChangeOccupation(){
+            IsOccupied=!IsOccupied;
         }
 
         private static readonly Dictionary<Colors, ConsoleColor> ColorMap = new() {
