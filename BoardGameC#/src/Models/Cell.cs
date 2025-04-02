@@ -27,10 +27,10 @@ namespace BoardGameC_.Models
             Console.ForegroundColor = ColorMap[Color];
             Console.BackgroundColor = ConsoleColor.DarkGray;
             if (!IsOccupied){
-                Console.Write(" ⬤ ");
+                Console.Write("⬤ ");
             }
             else{
-                Console.Write(" ◯ ");
+                Console.Write("◯");
             }
             Console.ResetColor();
         }
@@ -71,30 +71,4 @@ namespace BoardGameC_.Models
         
     }
 
-    public class EdgeCell : Cell {
-        private bool TopEdge {get; set;} 
-        public EdgeCell(int Row, int Column) : base(Colors.None, Row, Column) {
-            TopEdge = true;
-        }
-
-        public override void PrintCell()
-        {
-            Console.WriteLine($"Edge cell at row {Row}, column {Column}, Top Flag: {TopEdge}");
-        }
-        public void SetToSideEdge(){
-            TopEdge=!TopEdge;
-        }
-
-        public override void Display()
-        {
-            Console.BackgroundColor = ConsoleColor.DarkGray;
-            if (TopEdge){
-                Console.Write("__");
-            }
-            else{
-                Console.Write(" | ");
-            }
-            Console.ResetColor();
-        }
-    }
 }
