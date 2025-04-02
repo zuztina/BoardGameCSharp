@@ -6,7 +6,7 @@ namespace BoardGameC_.Models
 
 {
 
-    public enum Colors { Yellow, Blue, Red, Green }
+    public enum Colors { Yellow, Blue, Red, Green, None }
 
     public class Cell{
     
@@ -23,18 +23,19 @@ namespace BoardGameC_.Models
             IsOccupied = false;
         }
 
-        public void Display(){
+        public virtual void Display(){
             Console.ForegroundColor = ColorMap[Color];
+            Console.BackgroundColor = ConsoleColor.DarkGray;
             if (!IsOccupied){
-                Console.Write("⬤\n");
+                Console.Write(" ⬤ ");
             }
             else{
-                Console.Write("◯\n");
+                Console.Write(" ◯ ");
             }
-            
+            Console.ResetColor();
         }
 
-        public void PrintCell(){
+        public virtual void PrintCell(){
             Console.WriteLine($"Cell color: {Color}");
             Console.WriteLine($"Cell row: {Row}");
             Console.WriteLine($"Cell column: {Column}");
@@ -51,5 +52,49 @@ namespace BoardGameC_.Models
             { Colors.Red, ConsoleColor.DarkRed },
             { Colors.Green, ConsoleColor.Green }
         }; 
+    }
+
+    public class EmptyCell : Cell {
+        
+        public EmptyCell(int Row, int Column) : base(Colors.None, Row, Column) {}
+
+        public override void Display(){
+            Console.BackgroundColor = ConsoleColor.DarkGray;
+            Console.Write("  ");
+            Console.ResetColor();
+        }
+
+        public override void PrintCell()
+        {
+            Console.WriteLine($"Empty cell at row {Row}, column {Column}");
+        }
+        
+    }
+
+    public class EdgeCell : Cell {
+        private bool TopEdge {get; set;} 
+        public EdgeCell(int Row, int Column) : base(Colors.None, Row, Column) {
+            TopEdge = true;
+        }
+
+        public override void PrintCell()
+        {
+            Console.WriteLine($"Edge cell at row {Row}, column {Column}, Top Flag: {TopEdge}");
+        }
+        public void SetToSideEdge(){
+            TopEdge=!TopEdge;
+        }
+
+        public override void Display()
+        {
+            Console.BackgroundColor = ConsoleColor.DarkGray;
+            if (TopEdge){
+                Console.Write("__");
+            }
+            else{
+                Console.Write(" | ");
+            }
+            Console.ResetColor();
+        }
     }
 }
