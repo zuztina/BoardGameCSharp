@@ -10,7 +10,7 @@ namespace BoardGameC_.Models
         public int Width { get; private set; }
 
         private Cell[,] BoardCells;
-        private List<Player> PlayerPool;
+        public List<Player> PlayerPool;
         public HashSet<string> uniqueNicknames;
         public List<(int X, int Y)> StartingPositions;
 
@@ -125,7 +125,8 @@ namespace BoardGameC_.Models
         }
         public bool AddPlayer(string? Nick)
         {
-            if (IsValidNickname(Nick)){
+            if (IsValidNickname(Nick))
+            {
                 // add player nickname to unique list
                 uniqueNicknames.Add(Nick);
                 // add player to pool
@@ -134,13 +135,32 @@ namespace BoardGameC_.Models
                 int randomIndex = random.Next(StartingPositions.Count);
                 var tmpPosition = StartingPositions[randomIndex];
                 Console.WriteLine($"random position index: {randomIndex}, position {tmpPosition}");
-                Player tmpPlayer = new Player(Nick, tmpPosition.X, tmpPosition.Y);
+                Player tmpPlayer = new Player(Nick, tmpPosition, randomIndex);
                 PlayerPool.Add(tmpPlayer);
                 tmpPlayer.DisplayPlayer();
                 UpdateCell(tmpPosition.X, tmpPosition.Y);
                 return true;
             }
             return false;
+        }
+
+        public void MovePlayer(int PlayerIndex)
+        {
+            Console.WriteLine("updating palyers postion...");
+            Random random = new Random();
+            int randomIndex = random.Next(StartingPositions.Count);
+            var tmpPosition = StartingPositions[randomIndex];
+            Console.WriteLine($"new position index: {randomIndex}, position {tmpPosition}");
+            Console.WriteLine("old player status");
+            PlayerPool[PlayerIndex].DisplayPlayer();
+
+            // update old cell
+            UpdateCell(PlayerPool[PlayerIndex].Position.Item1, PlayerPool[PlayerIndex].Position.Item2);
+            Console.WriteLine("new player status");
+            PlayerPool[PlayerIndex].UpdatePosition(tmpPosition, randomIndex);
+            PlayerPool[PlayerIndex].DisplayPlayer();
+            // update new cell
+            UpdateCell(PlayerPool[PlayerIndex].Position.Item1, PlayerPool[PlayerIndex].Position.Item2);
         }
     }
 

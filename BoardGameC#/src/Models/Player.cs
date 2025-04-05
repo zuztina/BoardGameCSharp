@@ -1,11 +1,13 @@
+using Microsoft.VisualBasic;
+
 namespace BoardGameC_.Models
 {
 
     public class Player
     {
 
-        public int currentRow; public int currentColumn;
-
+        public (int, int) Position;
+        public int PositionIndex;
         public string Nickname { get; set; }
         public int BlueRight;
         public int RedRight;
@@ -19,12 +21,12 @@ namespace BoardGameC_.Models
 
         public int currentStreak;
         public int maxStreak;
-        public Player(string Nick, int randomRow, int randomColumn)
+        public Player(string Nick, (int, int) randomPosition, int index)
         {
 
             Nickname = Nick;
-            currentRow = randomRow;
-            currentColumn = randomColumn;
+            Position = randomPosition;
+            PositionIndex = index;
 
             BlueCards = 0;
             BlueRight = 0;
@@ -46,7 +48,7 @@ namespace BoardGameC_.Models
         {
             // Display the player's nickname and position
             Console.WriteLine($"Nickname: {Nickname}");
-            Console.WriteLine($"Position: ({currentRow}, {currentColumn})");
+            Console.WriteLine($"Position: ({Position}, {PositionIndex})");
 
             // Display the player's stats (cards and rights for each color category)
             Console.WriteLine("Cards and Rights:");
@@ -58,6 +60,12 @@ namespace BoardGameC_.Models
             // Display streak stats
             Console.WriteLine($"Current Streak: {currentStreak}");
             Console.WriteLine($"Max Streak: {maxStreak}");
+        }
+
+        public void UpdatePosition((int, int) newPosition, int newIndex)
+        {
+            Position = newPosition;
+            PositionIndex = newIndex;
         }
 
     }

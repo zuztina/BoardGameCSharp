@@ -130,6 +130,5 @@ class Program
         Console.WriteLine("Hra může začít...");
         MainBoard.DisplayBoard();
 
-
     }
 }
