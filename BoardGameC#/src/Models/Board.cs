@@ -10,12 +10,16 @@ namespace BoardGameC_.Models
         public int Width { get; private set; }
 
         private Cell[,] BoardCells;
+        private Player[] Pool;
+
+        public List<(int X, int Y)> StartingPositions;
 
         public Board(int initHeight, int initWidth)
         {
             Height = initHeight;
             Width = initWidth;
             BoardCells = new Cell[Height, Width];
+            StartingPositions = new List<(int X, int Y)>();
 
             for (int i = 0; i < Height; i++)
             {
@@ -48,6 +52,7 @@ namespace BoardGameC_.Models
                     if (j == 1 && i >= 1 && i < Height - 1)
                     {
                         BoardCells[i, j] = new Cell(Colors.Yellow, i, j);
+                        StartingPositions.Add((i, j));
                     }
                 }
             }
@@ -61,6 +66,7 @@ namespace BoardGameC_.Models
                     if (j == Width - 2 && i >= 1 && i < Height - 1)
                     {
                         BoardCells[i, j] = new Cell(Colors.Blue, i, j);
+                        StartingPositions.Add((i, j));
                     }
                 }
             }
@@ -74,6 +80,7 @@ namespace BoardGameC_.Models
                     if (i == 1 && j >= 2 && j < Width - 3)
                     {
                         BoardCells[i, j] = new Cell(Colors.Red, i, j);
+                        StartingPositions.Add((i, j));
                     }
                 }
             }
@@ -88,15 +95,27 @@ namespace BoardGameC_.Models
                     if (i == Height - 2 && j >= 2 && j < Width - 3)
                     {
                         BoardCells[i, j] = new Cell(Colors.Green, i, j);
+                        StartingPositions.Add((i, j));
                     }
                 }
             }
         }
 
-        public void UpdateCell(int cellRow, int cellColumn){
+        public void UpdateCell(int cellRow, int cellColumn)
+        {
             BoardCells[cellRow, cellColumn].ChangeOccupation();
+        }
+
+        public void ShowGameCells()
+        {
+            Console.WriteLine("Starting Positions:");
+            foreach (var position in StartingPositions)
+            {
+                // Print each tuple directly
+                Console.WriteLine($"({position.Item1}, {position.Item2})");
+            }
         }
     }
 
 
-}   
+}

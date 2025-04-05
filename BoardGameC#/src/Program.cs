@@ -13,6 +13,7 @@ class Program
         MainBoard.AddRedCells();
         MainBoard.AddGreenCells();
         MainBoard.DisplayBoard();
+        MainBoard.ShowGameCells();
         
         MainBoard.UpdateCell(1,2);
         MainBoard.UpdateCell(1,1);
