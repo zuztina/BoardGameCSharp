@@ -13,6 +13,7 @@ namespace BoardGameC_.Models
         public List<Player> PlayerPool;
         public HashSet<string> uniqueNicknames;
         public List<(int X, int Y)> StartingPositions;
+        public HashSet<int> OccupiedPositionIndices; // store used indices
 
         public Board(int initHeight, int initWidth)
         {
@@ -20,6 +21,7 @@ namespace BoardGameC_.Models
             Width = initWidth;
             BoardCells = new Cell[Height, Width];
             StartingPositions = new List<(int X, int Y)>();
+            OccupiedPositionIndices = new HashSet<int>();
             PlayerPool = new List<Player>();
             uniqueNicknames = new HashSet<string>();
 

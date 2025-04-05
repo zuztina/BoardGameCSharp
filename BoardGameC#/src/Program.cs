@@ -4,6 +4,7 @@ using BoardGameC_.Models;
 
 namespace BoardGameC_;
 
+// TODO solve placing players on same cells
 class Program
 {
     public void DisplayRules()
