@@ -10,8 +10,8 @@ namespace BoardGameC_.Models
         public int Width { get; private set; }
 
         private Cell[,] BoardCells;
-        private Player[] Pool;
-
+        private List<Player> PlayerPool;
+        public HashSet<string> uniqueNicknames;
         public List<(int X, int Y)> StartingPositions;
 
         public Board(int initHeight, int initWidth)
@@ -20,6 +20,8 @@ namespace BoardGameC_.Models
             Width = initWidth;
             BoardCells = new Cell[Height, Width];
             StartingPositions = new List<(int X, int Y)>();
+            PlayerPool = new List<Player>();
+            uniqueNicknames = new HashSet<string>();
 
             for (int i = 0; i < Height; i++)
             {
@@ -112,8 +114,33 @@ namespace BoardGameC_.Models
             foreach (var position in StartingPositions)
             {
                 // Print each tuple directly
-                Console.WriteLine($"({position.Item1}, {position.Item2})");
+                Console.WriteLine($"({position.X}, {position.Y})");
             }
+        }
+
+        // Method to validate the nickname (checks if it's non-empty and unique)
+        public bool IsValidNickname(string nickname)
+        {
+            return !string.IsNullOrEmpty(nickname) && !uniqueNicknames.Contains(nickname);
+        }
+        public bool AddPlayer(string? Nick)
+        {
+            if (IsValidNickname(Nick)){
+                // add player nickname to unique list
+                uniqueNicknames.Add(Nick);
+                // add player to pool
+                // get starting positions
+                Random random = new Random();
+                int randomIndex = random.Next(StartingPositions.Count);
+                var tmpPosition = StartingPositions[randomIndex];
+                Console.WriteLine($"random position index: {randomIndex}, position {tmpPosition}");
+                Player tmpPlayer = new Player(Nick, tmpPosition.X, tmpPosition.Y);
+                PlayerPool.Add(tmpPlayer);
+                tmpPlayer.DisplayPlayer();
+                UpdateCell(tmpPosition.X, tmpPosition.Y);
+                return true;
+            }
+            return false;
         }
     }
 
