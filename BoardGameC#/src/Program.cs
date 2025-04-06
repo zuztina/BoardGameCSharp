@@ -106,11 +106,13 @@ class Program
     static void Main(string[] args)
     {
         Card tmp = new Card("This is a question that will be wrapped into multiple lines due to its length.", "A: totototototototot    toto je odpoved pro A", "B: toto je odpoved pro A", "C: toto je odpoved pro A", 'A');
-        tmp.DisplayCardQuestion(8,10);
+        //tmp.DisplayCard(8,10,ConsoleColor.Cyan);
         Console.WriteLine();
-        tmp.DisplayCardAnswers(8,10);
+        tmp.DisplayCardQuestion(8,10,ConsoleColor.Cyan);
         Console.WriteLine();
-        tmp.DisplayCardRight(8,10);
+        //tmp.DisplayCardAnswers(8,10,ConsoleColor.Cyan, false);
+        Console.WriteLine();
+        tmp.DisplayCardAnswers(8,10,ConsoleColor.Cyan, true);
         Program main = new Program();
         // basic game  initialization
         Console.WriteLine("Vítejte! Probíhá příprava hry...");

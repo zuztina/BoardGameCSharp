@@ -1,7 +1,9 @@
+using System.Drawing;
+
 namespace BoardGameC_.Models
 {
 
-    class Card
+    public class Card
     {
 
         public string Question { get; set; }
@@ -10,8 +12,6 @@ namespace BoardGameC_.Models
         public string AnswerC { get; set; }
 
         public char RightAns { get; set; }
-
-
         public Card(string initQuestion, string initA, string initB, string initC, char rightAns)
         {
             Question = initQuestion;
@@ -21,14 +21,13 @@ namespace BoardGameC_.Models
             RightAns = rightAns;
         }
 
-        public void DisplayCard()
+        public void DisplayCard(int boardRows, int boardColumns, ConsoleColor color)
         {
-
-            int lineWidth = 29;
-            int rows = 8;
+            int lineWidth = 3 * (boardColumns - 1) + 2;  // Total width for each line (including padding), each column 3 spaces, column 1 only 2 spaces;
+            int rows = boardRows;
             for (int i = 0; i < rows; i++)
             {
-                Console.BackgroundColor = ConsoleColor.Cyan;
+                Console.BackgroundColor = color;
                 // Print a row of spaces (29 characters wide)
                 Console.WriteLine(new string(' ', lineWidth));
                 Console.ResetColor();
@@ -36,7 +35,7 @@ namespace BoardGameC_.Models
 
         }
 
-        public void DisplayCardQuestion(int boardRows, int boardColumns)
+        public void DisplayCardQuestion(int boardRows, int boardColumns, ConsoleColor color)
         {
             int lineWidth = 3 * (boardColumns - 1) + 2;  // Total width for each line (including padding), each column 3 spaces, column 1 only 2 spaces
             int padding = 2;     // Padding on both sides of the question
@@ -46,9 +45,18 @@ namespace BoardGameC_.Models
             List<string> wrappedQuestion = WrapTextToLines(Question, contentWidth);  // Wrap the question to fit the lines
             int questionLines = wrappedQuestion.Count;  // Get the number of lines needed for the question
             int startRow = (totalRows - questionLines) / 2;  // Calculate starting row to center the question
-            Console.BackgroundColor = ConsoleColor.DarkGray;
-            Console.ForegroundColor = ConsoleColor.Red;
 
+            Console.WriteLine("Stiskněte mezerník pro zobrazeni otazky a moznych odpovedi...");
+            Console.WriteLine();
+            DisplayCard(boardRows, boardColumns, color);
+            Console.WriteLine();
+            // Wait for spacebar
+            ConsoleKeyInfo key;
+            do
+            {
+                key = Console.ReadKey(intercept: true); // Do not show key in console
+            } while (key.Key != ConsoleKey.Spacebar);
+            Console.BackgroundColor = ConsoleColor.DarkGray;
             // Print blank lines before the question
             for (int i = 0; i < startRow; i++)
             {
@@ -67,10 +75,17 @@ namespace BoardGameC_.Models
             {
                 Console.WriteLine(new string(' ', lineWidth));  // Print the blank rows with padding
             }
+            Console.WriteLine();
+
+            do
+            {
+                key = Console.ReadKey(intercept: true); // Do not show key in console
+            } while (key.Key != ConsoleKey.Spacebar);
+            DisplayCardAnswers(boardRows, boardColumns, color, false);
             Console.ResetColor();
         }
 
-        public void DisplayCardAnswers(int boardRows, int boardColumns)
+        public void DisplayCardAnswers(int boardRows, int boardColumns, ConsoleColor textColor, bool showAns)
         {
             int lineWidth = 3 * (boardColumns - 1) + 2;  // Total width for each line (including padding), each column 3 spaces, column 1 only 2 spaces
             int padding = 2;     // Padding on both sides of the question
@@ -93,56 +108,9 @@ namespace BoardGameC_.Models
             // Print the wrapped question
             foreach (var line in wrappedA)
             {
-                string paddedLine = line.PadLeft(padding + line.Length).PadRight(lineWidth);  // Add padding on both sides
-                Console.WriteLine(paddedLine);  // Print the line with padding
-            }
-            // Print the wrapped question
-            foreach (var line in wrappedB)
-            {
-                string paddedLine = line.PadLeft(padding + line.Length).PadRight(lineWidth);  // Add padding on both sides
-                Console.WriteLine(paddedLine);  // Print the line with padding
-            }
-            // Print the wrapped question
-            foreach (var line in wrappedC)
-            {
-                string paddedLine = line.PadLeft(padding + line.Length).PadRight(lineWidth);  // Add padding on both sides
-                Console.WriteLine(paddedLine);  // Print the line with padding
-            }
-
-            // Print blank lines after the question
-            for (int i = startRow + lineNum; i < totalRows; i++)
-            {
-                Console.WriteLine(new string(' ', lineWidth));  // Print the blank rows with padding
-            }
-            Console.ResetColor();
-        }
-
-        public void DisplayCardRight(int boardRows, int boardColumns)
-        {
-            int lineWidth = 3 * (boardColumns - 1) + 2;  // Total width for each line (including padding), each column 3 spaces, column 1 only 2 spaces
-            int padding = 2;     // Padding on both sides of the question
-            int contentWidth = lineWidth - 2 * padding;  // The content width, accounting for the padding
-            int totalRows = boardRows;   // Total number of rows for displaying the question
-
-            List<string> wrappedA = WrapTextToLines(AnswerA, contentWidth);
-            List<string> wrappedB = WrapTextToLines(AnswerB, contentWidth);
-            List<string> wrappedC = WrapTextToLines(AnswerC, contentWidth);
-            Console.BackgroundColor = ConsoleColor.DarkGray;
-            // Calculate the number of lines for the answers
-            int lineNum = wrappedA.Count() + wrappedB.Count() + wrappedC.Count();
-            int startRow = (totalRows - lineNum) / 2;  // Calculate starting row to center 
-
-            // Print blank lines before the question
-            for (int i = 0; i < startRow; i++)
-            {
-                Console.WriteLine(new string(' ', lineWidth));  // Print the blank rows with padding
-            }
-            // Print the wrapped question
-            foreach (var line in wrappedA)
-            {
-                if (RightAns == 'A')
+                if (RightAns == 'A' && showAns)
                 {
-                    Console.ForegroundColor = ConsoleColor.Red;
+                    Console.ForegroundColor = textColor;
                     string paddedLine = line.PadLeft(padding + line.Length).PadRight(lineWidth);  // Add padding on both sides
                     Console.WriteLine(paddedLine);  // Print the line with padding
                     Console.ResetColor();
@@ -157,14 +125,36 @@ namespace BoardGameC_.Models
             // Print the wrapped question
             foreach (var line in wrappedB)
             {
-                string paddedLine = line.PadLeft(padding + line.Length).PadRight(lineWidth);  // Add padding on both sides
-                Console.WriteLine(paddedLine);  // Print the line with padding
+                if (RightAns == 'B'&& showAns)
+                {
+                    Console.ForegroundColor = textColor;
+                    string paddedLine = line.PadLeft(padding + line.Length).PadRight(lineWidth);  // Add padding on both sides
+                    Console.WriteLine(paddedLine);  // Print the line with padding
+                    Console.ResetColor();
+                    Console.BackgroundColor = ConsoleColor.DarkGray;
+                }
+                else
+                {
+                    string paddedLine = line.PadLeft(padding + line.Length).PadRight(lineWidth);  // Add padding on both sides
+                    Console.WriteLine(paddedLine);  // Print the line with padding
+                }
             }
             // Print the wrapped question
             foreach (var line in wrappedC)
             {
-                string paddedLine = line.PadLeft(padding + line.Length).PadRight(lineWidth);  // Add padding on both sides
-                Console.WriteLine(paddedLine);  // Print the line with padding
+                if (RightAns == 'C'&& showAns)
+                {
+                    Console.ForegroundColor = textColor;
+                    string paddedLine = line.PadLeft(padding + line.Length).PadRight(lineWidth);  // Add padding on both sides
+                    Console.WriteLine(paddedLine);  // Print the line with padding
+                    Console.ResetColor();
+                    Console.BackgroundColor = ConsoleColor.DarkGray;
+                }
+                else
+                {
+                    string paddedLine = line.PadLeft(padding + line.Length).PadRight(lineWidth);  // Add padding on both sides
+                    Console.WriteLine(paddedLine);  // Print the line with padding
+                }
             }
 
             // Print blank lines after the question
@@ -175,7 +165,7 @@ namespace BoardGameC_.Models
             Console.ResetColor();
         }
 
-        private List<string> WrapTextToLines(string text, int maxLineWidth)
+        public List<string> WrapTextToLines(string text, int maxLineWidth)
         {
             List<string> wrappedLines = new List<string>();
             string[] words = text.Split(' ');  // Split the question into words
@@ -204,5 +194,8 @@ namespace BoardGameC_.Models
 
             return wrappedLines;
         }
+
     }
+
+
 }
