@@ -105,12 +105,17 @@ class Program
     }
     static void Main(string[] args)
     {
+        Card tmp = new Card("This is a question that will be wrapped into multiple lines due to its length.", "A: totototototototot    toto je odpoved pro A", "B: toto je odpoved pro A", "C: toto je odpoved pro A", 'A');
+        tmp.DisplayCardQuestion(8,10);
+        Console.WriteLine();
+        tmp.DisplayCardAnswers(8,10);
+        Console.WriteLine();
+        tmp.DisplayCardRight(8,10);
         Program main = new Program();
         // basic game  initialization
         Console.WriteLine("Vítejte! Probíhá příprava hry...");
         Board MainBoard = new Board(8, 10);
         // display board when ready
-        MainBoard.ShowGameCells();
         Console.WriteLine("Vše připraveno!");
         MainBoard.DisplayBoard();
         Console.WriteLine("Žlutá kategorie představuje otázky z oblasti: Zahraniční jídla");
