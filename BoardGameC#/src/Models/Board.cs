@@ -11,9 +11,9 @@ namespace BoardGameC_.Models
 
         private Cell[,] BoardCells;
         public List<Player> PlayerPool;
-        public HashSet<string> uniqueNicknames;
+        public HashSet<string> UniqueNicknames;
         public List<(int X, int Y)> StartingPositions;
-        public HashSet<int> OccupiedPositionIndices; // store used indices
+        public HashSet<int> OccupiedPositionIndex; // store used indices
 
         public Board(int initHeight, int initWidth)
         {
@@ -21,9 +21,9 @@ namespace BoardGameC_.Models
             Width = initWidth;
             BoardCells = new Cell[Height, Width];
             StartingPositions = new List<(int X, int Y)>();
-            OccupiedPositionIndices = new HashSet<int>();
+            OccupiedPositionIndex = new HashSet<int>();
             PlayerPool = new List<Player>();
-            uniqueNicknames = new HashSet<string>();
+            UniqueNicknames = new HashSet<string>();
 
             for (int i = 0; i < Height; i++)
             {
@@ -105,7 +105,7 @@ namespace BoardGameC_.Models
             }
         }
 
-        public void UpdateCell(int cellRow, int cellColumn)
+        public void UpdateCellOccupation(int cellRow, int cellColumn)
         {
             BoardCells[cellRow, cellColumn].ChangeOccupation();
         }
@@ -123,30 +123,94 @@ namespace BoardGameC_.Models
         // Method to validate the nickname (checks if it's non-empty and unique)
         public bool IsValidNickname(string nickname)
         {
-            return !string.IsNullOrEmpty(nickname) && !uniqueNicknames.Contains(nickname);
+            return !string.IsNullOrEmpty(nickname) && !UniqueNicknames.Contains(nickname);
         }
-        public bool AddPlayer(string? Nick)
+        public int FindNextPosition(int positionIndex)
         {
-            if (IsValidNickname(Nick))
+            int maxPosition = StartingPositions.Count();
+            int forwardDistance = int.MaxValue;
+            int backwardDistance = int.MaxValue;
+            int forwardIndex = -1;
+            int backwardIndex = -1;
+
+            for (int i = positionIndex + 1; i < maxPosition; i++)
+            {
+                if (!OccupiedPositionIndex.Contains(i))
+                {
+                    forwardDistance = i - positionIndex;
+                    forwardIndex = i;
+                    break;
+                }
+            }
+            for (int i = positionIndex - 1; i >= 0; i--)
+            {
+                if (!OccupiedPositionIndex.Contains(i))
+                {
+                    backwardDistance = positionIndex - i;
+                    backwardIndex = i;
+                    break;
+                }
+            }
+
+            // Decide which index to return
+            if (forwardDistance <= backwardDistance && forwardIndex != -1)
+            {
+                return forwardIndex;
+            }
+            else if (backwardIndex != -1)
+            {
+                return backwardIndex;
+            }
+
+            // If no index is available
+            throw new Exception("No available starting positions.");
+
+        }
+        public bool AddPlayer(string? nick)
+        {
+            if (IsValidNickname(nick))
             {
                 // add player nickname to unique list
-                uniqueNicknames.Add(Nick);
-                // add player to pool
+                UniqueNicknames.Add(nick);
                 // get starting positions
                 Random random = new Random();
                 int randomIndex = random.Next(StartingPositions.Count);
-                var tmpPosition = StartingPositions[randomIndex];
-                Console.WriteLine($"random position index: {randomIndex}, position {tmpPosition}");
-                Player tmpPlayer = new Player(Nick, tmpPosition, randomIndex);
-                PlayerPool.Add(tmpPlayer);
-                tmpPlayer.DisplayPlayer();
-                UpdateCell(tmpPosition.X, tmpPosition.Y);
-                return true;
+                var randomPosition = StartingPositions[randomIndex];
+                //check position occuapncy
+                Console.WriteLine($"random position index: {randomIndex}, position {randomPosition}");
+                if (!OccupiedPositionIndex.Contains(randomIndex))
+                {
+                    // create new player instance
+                    Player tmpPlayer = new Player(nick, randomPosition, randomIndex);
+                    // add new Player to Pool
+                    PlayerPool.Add(tmpPlayer);
+                    tmpPlayer.DisplayPlayer();
+                    // update cell to occupied and add index to occupancy list
+                    UpdateCellOccupation(randomPosition.X, randomPosition.Y);
+                    OccupiedPositionIndex.Add(randomIndex);
+                    return true;
+                }
+                else
+                {
+                    // find new position
+                    int tmpIndex =  FindNextPosition(randomIndex);
+                    var tmpPosition = StartingPositions[tmpIndex];
+                    Console.WriteLine($"closest to random position index: {tmpIndex}, position {tmpPosition}");
+                    // create new player instance
+                    Player tmpPlayer = new Player(nick, tmpPosition, randomIndex);
+                    // add new Player to Pool
+                    PlayerPool.Add(tmpPlayer);
+                    tmpPlayer.DisplayPlayer();
+                    // update cell to occupied and add index to occupancy list
+                    UpdateCellOccupation(tmpPosition.X, tmpPosition.Y);
+                    OccupiedPositionIndex.Add(randomIndex);
+                    return true;
+                }
             }
             return false;
         }
 
-        public void MovePlayer(int PlayerIndex)
+        public void MovePlayer(int playerIndex)
         {
             Console.WriteLine("updating palyers postion...");
             Random random = new Random();
@@ -154,15 +218,16 @@ namespace BoardGameC_.Models
             var tmpPosition = StartingPositions[randomIndex];
             Console.WriteLine($"new position index: {randomIndex}, position {tmpPosition}");
             Console.WriteLine("old player status");
-            PlayerPool[PlayerIndex].DisplayPlayer();
-
+            PlayerPool[playerIndex].DisplayPlayer();
+            OccupiedPositionIndex.Remove(PlayerPool[playerIndex].PositionIndex);
             // update old cell
-            UpdateCell(PlayerPool[PlayerIndex].Position.Item1, PlayerPool[PlayerIndex].Position.Item2);
+            UpdateCellOccupation(PlayerPool[playerIndex].Position.Item1, PlayerPool[playerIndex].Position.Item2);
             Console.WriteLine("new player status");
-            PlayerPool[PlayerIndex].UpdatePosition(tmpPosition, randomIndex);
-            PlayerPool[PlayerIndex].DisplayPlayer();
+            PlayerPool[playerIndex].UpdatePosition(tmpPosition, randomIndex);
+            PlayerPool[playerIndex].DisplayPlayer();
             // update new cell
-            UpdateCell(PlayerPool[PlayerIndex].Position.Item1, PlayerPool[PlayerIndex].Position.Item2);
+            UpdateCellOccupation(PlayerPool[playerIndex].Position.Item1, PlayerPool[playerIndex].Position.Item2);
+            OccupiedPositionIndex.Add(randomIndex);
         }
     }
 

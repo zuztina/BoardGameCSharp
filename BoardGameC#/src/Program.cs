@@ -74,17 +74,17 @@ class Program
     // Adding players to the pool and setting starting positions
     for (int i = 0; i < playerCount; i++)
     {
-        string Nickname = string.Empty;
+        string nickname = string.Empty;
         tries = 0;
         while (tries < 3)
         {
             Console.WriteLine($"Zadejte prosím jméno hráče {i + 1}");
-            Nickname = Console.ReadLine()?.Trim();
-            bool validPlayer = MainBoard.AddPlayer(Nickname);
+            nickname = Console.ReadLine()?.Trim();
+            bool validPlayer = MainBoard.AddPlayer(nickname);
 
             if (validPlayer)
             {
-                Console.WriteLine($"Hráč {Nickname} úspěšně přidán...");
+                Console.WriteLine($"Hráč {nickname} úspěšně přidán...");
                 break;
             }
             else

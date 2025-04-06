@@ -19,12 +19,12 @@ namespace BoardGameC_.Models
         public int GreenCards;
         public int YellowCards;
 
-        public int currentStreak;
-        public int maxStreak;
-        public Player(string Nick, (int, int) randomPosition, int index)
+        public int CurrentStreak;
+        public int MaxStreak;
+        public Player(string nick, (int, int) randomPosition, int index)
         {
 
-            Nickname = Nick;
+            Nickname = nick;
             Position = randomPosition;
             PositionIndex = index;
 
@@ -40,8 +40,8 @@ namespace BoardGameC_.Models
             YellowCards = 0;
             YellowRight = 0;
 
-            currentStreak = 0;
-            maxStreak = 0;
+            CurrentStreak = 0;
+            MaxStreak = 0;
         }
 
         public void DisplayPlayer()
@@ -58,8 +58,8 @@ namespace BoardGameC_.Models
             Console.WriteLine($"  Yellow Cards: {YellowCards}, Yellow Rights: {YellowRight}");
 
             // Display streak stats
-            Console.WriteLine($"Current Streak: {currentStreak}");
-            Console.WriteLine($"Max Streak: {maxStreak}");
+            Console.WriteLine($"Current Streak: {CurrentStreak}");
+            Console.WriteLine($"Max Streak: {MaxStreak}");
         }
 
         public void UpdatePosition((int, int) newPosition, int newIndex)
