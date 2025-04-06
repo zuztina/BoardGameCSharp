@@ -38,45 +38,24 @@ namespace BoardGameC_.Models
             {
                 symbol = "⬤";
             }
-            if ((Color == Colors.Red || Color == Colors.Green) && Column == 6)
-            {
-                Console.Write(" " + symbol);
+            if(Column==1){
+                Console.Write(symbol + " ");
             }
-            else if (Color == Colors.Blue && Column == 8 && (Row == 1 || Row == 6))
-            {
-                Console.Write(" " + symbol);
-            }
-            else if (Column == 8 && (Row != 1 && Row != 6))
-            {
-                Console.Write("  " + symbol);
-            }
-            else
-            {
+            else{
                 Console.Write(" " + symbol + " ");
             }
             Console.ResetColor();
         }
 
-                public virtual void DisplayPlayerPosition()
+        public virtual void DisplayPlayerPosition()
         {
             Console.ForegroundColor = ConsoleColor.DarkMagenta;
             Console.BackgroundColor = ConsoleColor.DarkGray;
             string symbol = "⬤";
-            if (IsOccupied)
-            if ((Color == Colors.Red || Color == Colors.Green) && Column == 6)
-            {
-                Console.Write(" " + symbol);
+            if(Column==1){
+                Console.Write(symbol + " ");
             }
-            else if (Color == Colors.Blue && Column == 8 && (Row == 1 || Row == 6))
-            {
-                Console.Write(" " + symbol);
-            }
-            else if (Column == 8 && (Row != 1 && Row != 6))
-            {
-                Console.Write("  " + symbol);
-            }
-            else
-            {
+            else{
                 Console.Write(" " + symbol + " ");
             }
             Console.ResetColor();
@@ -111,12 +90,10 @@ namespace BoardGameC_.Models
         public override void Display()
         {
             Console.BackgroundColor = ConsoleColor.DarkGray;
-            if (Column == 6 || Column == 7 || Column == 0)
-            {
-                Console.Write(" ");
+            if(Column==1){
+                Console.Write("  ");
             }
-            else
-            {
+            else{
                 Console.Write("   ");
             }
             Console.ResetColor();

@@ -31,7 +31,8 @@ namespace BoardGameC_.Models
                 {
                     BoardCells[i, j] = new EmptyCell(i, j);  // Create an empty cell
                 }
-            }// adding colored gamecells to board
+            }
+            // adding colored gamecells to board
             AddRedCells();
             AddBlueCells();
             AddGreenCells();
@@ -90,31 +91,21 @@ namespace BoardGameC_.Models
         }
         public void AddBlueCells()
         {
-            for (int i = 0; i < Height; i++)
+            for (int i = 1; i < Height - 1; i++)
             {
-                for (int j = 0; j < Width; j++)
-                {
-                    if (j == Width - 2 && i >= 1 && i < Height - 1)
-                    {
-                        BoardCells[i, j] = new Cell(Colors.Blue, i, j);
-                        StartingPositions.Add((i, j));
-                    }
-                }
+                BoardCells[i, Width - 2] = new Cell(Colors.Blue, i, Width - 2);
+                StartingPositions.Add((i, Width - 2));
             }
         }
         public void AddRedCells()
         {
-            for (int i = 0; i < Height; i++)
-            {
-                for (int j = 0; j < Width; j++)
+            Console.WriteLine($"posledno red: {Width-3}");
+                for (int j = 2; j < Width-2; j++)
                 {
-                    if (i == 1 && j >= 2 && j < Width - 3)
-                    {
-                        BoardCells[i, j] = new Cell(Colors.Red, i, j);
-                        StartingPositions.Add((i, j));
-                    }
+                        BoardCells[1, j] = new Cell(Colors.Red, 1, j);
+                        StartingPositions.Add((1, j));
                 }
-            }
+            
         }
 
         public void AddGreenCells()
@@ -123,7 +114,7 @@ namespace BoardGameC_.Models
             {
                 for (int j = Width - 1; j >= 0; j--)
                 {
-                    if (i == Height - 2 && j >= 2 && j < Width - 3)
+                    if (i == Height - 2 && j >= 2 && j < Width - 2)
                     {
                         BoardCells[i, j] = new Cell(Colors.Green, i, j);
                         StartingPositions.Add((i, j));
