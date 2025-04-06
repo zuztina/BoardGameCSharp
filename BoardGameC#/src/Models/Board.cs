@@ -31,10 +31,16 @@ namespace BoardGameC_.Models
                 {
                     BoardCells[i, j] = new EmptyCell(i, j);  // Create an empty cell
                 }
-            }
+            }// adding colored gamecells to board
+            AddRedCells();
+            AddBlueCells();
+            AddGreenCells();
+            AddYellowCells();
+            StartingPositions.Remove((1, 1));
+            StartingPositions.Insert(0, (1, 1));
         }
 
-        
+
         // Display the board on the console
         public void DisplayBoard()
         {
@@ -57,10 +63,12 @@ namespace BoardGameC_.Models
                 for (int j = 0; j < Width; j++)
                 {
                     // players position
-                    if(i==currentPlayer.Position.Item1 && j == currentPlayer.Position.Item2 ){
+                    if (i == currentPlayer.Position.Item1 && j == currentPlayer.Position.Item2)
+                    {
                         BoardCells[i, j].DisplayPlayerPosition();
                     }
-                    else{
+                    else
+                    {
                         BoardCells[i, j].Display();  // Call the Display method for each cell
                     }
                 }
@@ -70,16 +78,14 @@ namespace BoardGameC_.Models
 
         public void AddYellowCells()
         {
-            for (int i = 0; i < Height; i++)
+            for (int i = Height - 1; i >= 1; i--)
             {
-                for (int j = 0; j < Width; j++)
+                if (i < Height - 1)
                 {
-                    if (j == 1 && i >= 1 && i < Height - 1)
-                    {
-                        BoardCells[i, j] = new Cell(Colors.Yellow, i, j);
-                        StartingPositions.Add((i, j));
-                    }
+                    BoardCells[i, 1] = new Cell(Colors.Yellow, i, 1);
+                    StartingPositions.Add((i, 1));
                 }
+
             }
         }
         public void AddBlueCells()
@@ -115,7 +121,7 @@ namespace BoardGameC_.Models
         {
             for (int i = 0; i < Height; i++)
             {
-                for (int j = 0; j < Width; j++)
+                for (int j = Width - 1; j >= 0; j--)
                 {
                     if (i == Height - 2 && j >= 2 && j < Width - 3)
                     {
@@ -134,10 +140,10 @@ namespace BoardGameC_.Models
         public void ShowGameCells()
         {
             Console.WriteLine("Starting Positions:");
-            foreach (var position in StartingPositions)
+            for (int i = 0; i < StartingPositions.Count; i++)
             {
-                // Print each tuple directly
-                Console.WriteLine($"({position.X}, {position.Y})");
+                var position = StartingPositions[i];
+                Console.WriteLine($"({position.X}, {position.Y}, index: {i})");
             }
         }
 
@@ -233,6 +239,11 @@ namespace BoardGameC_.Models
 
         public void MovePlayer(int playerIndex)
         {
+            Console.WriteLine($"occupied indexes");
+            foreach (var element in OccupiedPositionIndex)
+            {
+                Console.WriteLine(element);
+            }
             int moveIndex = DiceRoll();
             int maxPosition = StartingPositions.Count();
             // new index

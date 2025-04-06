@@ -110,10 +110,11 @@ class Program
         Console.WriteLine("Vítejte! Probíhá příprava hry...");
         Board MainBoard = new Board(8, 10);
         // adding colored gamecells to board
-        MainBoard.AddYellowCells();
-        MainBoard.AddGreenCells();
-        MainBoard.AddRedCells();
+        /*MainBoard.AddRedCells();
         MainBoard.AddBlueCells();
+        MainBoard.AddGreenCells();
+        MainBoard.AddYellowCells();
+        */
         // display board when ready
         MainBoard.ShowGameCells();
         Console.WriteLine("Vše připraveno!");
