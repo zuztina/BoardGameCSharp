@@ -45,64 +45,64 @@ class Program
     }
 
     public bool InitializePlayers(Board MainBoard, ref int playerCount)
-{
-    // Player count initialization with validation
-    int tries = 0;
-    while (tries < 3)
     {
-        Console.WriteLine("Prosím zadejte počet hráčů (2-6)...");
-        playerCount = Convert.ToInt32(Console.ReadLine());
-        if (playerCount >= 2 && playerCount <= 6)
-        {
-            Console.WriteLine($"Počet hráčů pro tuto hru: {playerCount}");
-            break;
-        }
-        else
-        {
-            Console.WriteLine("Špatný počet hráčů, prosím zadejte číslo mezi 2-6...");
-            tries++;
-        }
-    }
-
-    if (tries == 3)
-    {
-        Console.WriteLine("Příliš mnoho pokusů. Program se ukončí.");
-        Environment.Exit(0); // Ends the program
-        return false;
-    }
-
-    // Adding players to the pool and setting starting positions
-    for (int i = 0; i < playerCount; i++)
-    {
-        string nickname = string.Empty;
-        tries = 0;
+        // Player count initialization with validation
+        int tries = 0;
         while (tries < 3)
         {
-            Console.WriteLine($"Zadejte prosím jméno hráče {i + 1}");
-            nickname = Console.ReadLine()?.Trim();
-            bool validPlayer = MainBoard.AddPlayer(nickname);
-
-            if (validPlayer)
+            Console.WriteLine("Prosím zadejte počet hráčů (2-6)...");
+            playerCount = Convert.ToInt32(Console.ReadLine());
+            if (playerCount >= 2 && playerCount <= 6)
             {
-                Console.WriteLine($"Hráč {nickname} úspěšně přidán...");
+                Console.WriteLine($"Počet hráčů pro tuto hru: {playerCount}");
                 break;
             }
             else
             {
-                Console.WriteLine("Jméno hráče neplatné nebo již existuje, zadejte prosím nové jméno...");
+                Console.WriteLine("Špatný počet hráčů, prosím zadejte číslo mezi 2-6...");
                 tries++;
             }
         }
+
         if (tries == 3)
         {
             Console.WriteLine("Příliš mnoho pokusů. Program se ukončí.");
             Environment.Exit(0); // Ends the program
             return false;
         }
-    }
 
-    return true;
-}
+        // Adding players to the pool and setting starting positions
+        for (int i = 0; i < playerCount; i++)
+        {
+            string nickname = string.Empty;
+            tries = 0;
+            while (tries < 3)
+            {
+                Console.WriteLine($"Zadejte prosím jméno hráče {i + 1}");
+                nickname = Console.ReadLine()?.Trim();
+                bool validPlayer = MainBoard.AddPlayer(nickname);
+
+                if (validPlayer)
+                {
+                    Console.WriteLine($"Hráč {nickname} úspěšně přidán...");
+                    break;
+                }
+                else
+                {
+                    Console.WriteLine("Jméno hráče neplatné nebo již existuje, zadejte prosím nové jméno...");
+                    tries++;
+                }
+            }
+            if (tries == 3)
+            {
+                Console.WriteLine("Příliš mnoho pokusů. Program se ukončí.");
+                Environment.Exit(0); // Ends the program
+                return false;
+            }
+        }
+
+        return true;
+    }
     static void Main(string[] args)
     {
         Program main = new Program();
@@ -111,17 +111,18 @@ class Program
         Board MainBoard = new Board(8, 10);
         // adding colored gamecells to board
         MainBoard.AddYellowCells();
+        MainBoard.AddGreenCells();
         MainBoard.AddRedCells();
         MainBoard.AddBlueCells();
-        MainBoard.AddGreenCells();
         // display board when ready
+        MainBoard.ShowGameCells();
         Console.WriteLine("Vše připraveno!");
         MainBoard.DisplayBoard();
         Console.WriteLine("Žlutá kategorie představuje otázky z oblasti: Zahraniční jídla");
         Console.WriteLine("Červená kategorie představuje otázky z oblasti: Česká jídla");
         Console.WriteLine("Modrá kategorie představuje otázky z oblasti: Nápoje");
         Console.WriteLine("Zelená kategorie představuje otázky z oblasti: Zajímavosti");
-        
+
         // possible rule explanation
         main.DisplayRules();
         // Player initialization
@@ -131,5 +132,14 @@ class Program
         Console.WriteLine("Hra může začít...");
         MainBoard.DisplayBoard();
 
+        for (int i = 0; i < playerCount; i++)
+        {
+            Console.WriteLine($"current player before: {MainBoard.PlayerPool[i].Nickname} ");
+            MainBoard.DisplayBoardPlayer(MainBoard.PlayerPool[i]);
+            MainBoard.MovePlayer(i);
+            Console.WriteLine($"current player after move: {MainBoard.PlayerPool[i].Nickname} ");
+            MainBoard.DisplayBoardPlayer(MainBoard.PlayerPool[i]);
+        }
+        MainBoard.DisplayBoard();
     }
 }

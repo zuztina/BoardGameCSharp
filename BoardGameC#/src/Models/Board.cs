@@ -33,6 +33,8 @@ namespace BoardGameC_.Models
                 }
             }
         }
+
+        
         // Display the board on the console
         public void DisplayBoard()
         {
@@ -42,6 +44,25 @@ namespace BoardGameC_.Models
                 for (int j = 0; j < Width; j++)
                 {
                     BoardCells[i, j].Display();  // Call the Display method for each cell
+                }
+                Console.WriteLine(); // Move to the next line after each row
+            }
+        }
+
+        public void DisplayBoardPlayer(Player currentPlayer)
+        {
+            //Console.WriteLine();
+            for (int i = 0; i < Height; i++)
+            {
+                for (int j = 0; j < Width; j++)
+                {
+                    // players position
+                    if(i==currentPlayer.Position.Item1 && j == currentPlayer.Position.Item2 ){
+                        BoardCells[i, j].DisplayPlayerPosition();
+                    }
+                    else{
+                        BoardCells[i, j].Display();  // Call the Display method for each cell
+                    }
                 }
                 Console.WriteLine(); // Move to the next line after each row
             }
@@ -193,7 +214,7 @@ namespace BoardGameC_.Models
                 else
                 {
                     // find new position
-                    int tmpIndex =  FindNextPosition(randomIndex);
+                    int tmpIndex = FindNextPosition(randomIndex);
                     var tmpPosition = StartingPositions[tmpIndex];
                     Console.WriteLine($"closest to random position index: {tmpIndex}, position {tmpPosition}");
                     // create new player instance
@@ -212,22 +233,57 @@ namespace BoardGameC_.Models
 
         public void MovePlayer(int playerIndex)
         {
+            int moveIndex = DiceRoll();
+            int maxPosition = StartingPositions.Count();
+            // new index
+            int newIndex = PlayerPool[playerIndex].PositionIndex + moveIndex;
+            if (newIndex >= maxPosition)
+            {
+                newIndex = newIndex - maxPosition;
+            }
+            // check position availibility
+            if (OccupiedPositionIndex.Contains(newIndex))
+            {
+                // find new position
+                newIndex = FindNextPosition(newIndex);
+                Console.WriteLine($"closest to new position index after dice roll: {newIndex}");
+
+            }
+            var newPosition = StartingPositions[newIndex];
+            Console.WriteLine($"old position index: {PlayerPool[playerIndex].PositionIndex}, position {StartingPositions[PlayerPool[playerIndex].PositionIndex]}");
+            Console.WriteLine($"new position index: {newIndex}, position {newPosition}");
+            //
             Console.WriteLine("updating palyers postion...");
-            Random random = new Random();
-            int randomIndex = random.Next(StartingPositions.Count);
-            var tmpPosition = StartingPositions[randomIndex];
-            Console.WriteLine($"new position index: {randomIndex}, position {tmpPosition}");
-            Console.WriteLine("old player status");
+            /*Console.WriteLine("old player status");
             PlayerPool[playerIndex].DisplayPlayer();
+            */
             OccupiedPositionIndex.Remove(PlayerPool[playerIndex].PositionIndex);
             // update old cell
             UpdateCellOccupation(PlayerPool[playerIndex].Position.Item1, PlayerPool[playerIndex].Position.Item2);
             Console.WriteLine("new player status");
-            PlayerPool[playerIndex].UpdatePosition(tmpPosition, randomIndex);
-            PlayerPool[playerIndex].DisplayPlayer();
+            PlayerPool[playerIndex].UpdatePosition(newPosition, newIndex);
+            //PlayerPool[playerIndex].DisplayPlayer();
             // update new cell
             UpdateCellOccupation(PlayerPool[playerIndex].Position.Item1, PlayerPool[playerIndex].Position.Item2);
-            OccupiedPositionIndex.Add(randomIndex);
+            OccupiedPositionIndex.Add(newIndex);
+        }
+
+        public int DiceRoll()
+        {
+            Console.WriteLine("Stiskněte mezerník pro hod kostkou...");
+
+            // Wait for spacebar
+            ConsoleKeyInfo key;
+            do
+            {
+                key = Console.ReadKey(intercept: true); // Do not show key in console
+            } while (key.Key != ConsoleKey.Spacebar);
+
+            // Simulate dice roll
+            Random random = new Random();
+            int rollAns = random.Next(1, 6);
+            Console.WriteLine($"Výsledek tvého hodu {rollAns}");
+            return rollAns;
         }
     }
 

@@ -57,6 +57,31 @@ namespace BoardGameC_.Models
             Console.ResetColor();
         }
 
+                public virtual void DisplayPlayerPosition()
+        {
+            Console.ForegroundColor = ConsoleColor.DarkMagenta;
+            Console.BackgroundColor = ConsoleColor.DarkGray;
+            string symbol = "⬤";
+            if (IsOccupied)
+            if ((Color == Colors.Red || Color == Colors.Green) && Column == 6)
+            {
+                Console.Write(" " + symbol);
+            }
+            else if (Color == Colors.Blue && Column == 8 && (Row == 1 || Row == 6))
+            {
+                Console.Write(" " + symbol);
+            }
+            else if (Column == 8 && (Row != 1 && Row != 6))
+            {
+                Console.Write("  " + symbol);
+            }
+            else
+            {
+                Console.Write(" " + symbol + " ");
+            }
+            Console.ResetColor();
+        }
+
         public virtual void PrintCell()
         {
             Console.WriteLine($"Cell color: {Color}");
