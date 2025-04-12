@@ -1,23 +1,23 @@
 {
     "dotnet.defaultSolution": "BoardGameC#.sln",
     "workbench.colorCustomizations": {
-        "activityBar.activeBackground": "#1b2da3",
-        "activityBar.background": "#1b2da3",
+        "activityBar.activeBackground": "#278a9c",
+        "activityBar.background": "#278a9c",
         "activityBar.foreground": "#e7e7e7",
         "activityBar.inactiveForeground": "#e7e7e799",
-        "activityBarBadge.background": "#db243c",
+        "activityBarBadge.background": "#802071",
         "activityBarBadge.foreground": "#e7e7e7",
         "commandCenter.border": "#e7e7e799",
-        "sash.hoverBorder": "#1b2da3",
-        "statusBar.background": "#142177",
+        "sash.hoverBorder": "#278a9c",
+        "statusBar.background": "#1d6673",
         "statusBar.foreground": "#e7e7e7",
-        "statusBarItem.hoverBackground": "#1b2da3",
-        "statusBarItem.remoteBackground": "#142177",
+        "statusBarItem.hoverBackground": "#278a9c",
+        "statusBarItem.remoteBackground": "#1d6673",
         "statusBarItem.remoteForeground": "#e7e7e7",
-        "titleBar.activeBackground": "#142177",
+        "titleBar.activeBackground": "#1d6673",
         "titleBar.activeForeground": "#e7e7e7",
-        "titleBar.inactiveBackground": "#14217799",
+        "titleBar.inactiveBackground": "#1d667399",
         "titleBar.inactiveForeground": "#e7e7e799"
     },
-    "peacock.color": "#142177"
+    "peacock.color": "#1d6673"
 }

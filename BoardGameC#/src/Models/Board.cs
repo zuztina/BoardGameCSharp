@@ -9,7 +9,7 @@ namespace BoardGameC_.Models
         public int Height { get; private set; }
         public int Width { get; private set; }
 
-        private Cell[,] BoardCells;
+        public Cell[,] BoardCells;
         public List<Player> PlayerPool;
         public HashSet<string> UniqueNicknames;
         public List<(int X, int Y)> StartingPositions;
@@ -202,7 +202,7 @@ namespace BoardGameC_.Models
                     Player tmpPlayer = new Player(nick, randomPosition, randomIndex);
                     // add new Player to Pool
                     PlayerPool.Add(tmpPlayer);
-                    tmpPlayer.DisplayPlayer();
+                    //tmpPlayer.DisplayPlayer();
                     // update cell to occupied and add index to occupancy list
                     UpdateCellOccupation(randomPosition.X, randomPosition.Y);
                     OccupiedPositionIndex.Add(randomIndex);

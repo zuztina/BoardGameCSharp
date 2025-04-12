@@ -1,0 +1,58 @@
+{
+    "cards": [
+    {
+    "question": "Původem čínské ovoce naši je druhem...Doplňte, čeho je druhem",
+    "answers": {
+        "A": "hrušky",
+        "B": "melounu",
+        "C": "jablka"
+    },
+    "rightAnswer": "A"
+    },
+    {
+    "question": "Kořenové hlízy povijnice jedlé pocházející ze Střední Ameriky se nazývají sladké brambory neboli ...?",
+    "answers": {
+        "A": "batáty",
+        "B": "topinambur",
+        "C": "smldinec"
+    },
+    "rightAnswer": "A"
+    }, 
+    {
+    "question": "Biotin je jeden z vitaminů obsažených v pivu. Jakým písmenem se označuje?",
+    "answers": {
+        "A": "A",
+        "B": "K",
+        "C": "H"
+    },
+    "rightAnswer": "C"
+    },
+    {
+    "question": "Který výraz zdomácněl v našich kuchyních pro ovesné vločky smíchné s ořechy, sušeným ovocem, medem a čokoládou?",
+    "answers": {
+        "A": "müsli",
+        "B": "corn flakes",
+        "C": "minnies"
+    },
+    "rightAnswer": "A"
+    },
+    {
+    "question": "Nduja má pikantní chuť a pochází z italeské Kalábrie. Čeho je to druh?",
+    "answers": {
+        "A": "sýra",
+        "B": "salámu",
+        "C": "salátu"
+    },
+    "rightAnswer": "B"
+    },
+    {
+    "question": "Ze které části rostliny některých orchidejí se získává koření vanilka?",
+    "answers": {
+        "A": "z tobolky",
+        "B": "z listu",
+        "C": "z kořene"
+    },
+    "rightAnswer": "A"
+    }
+    ]
+}

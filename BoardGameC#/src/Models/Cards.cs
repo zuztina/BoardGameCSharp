@@ -2,7 +2,13 @@ using System.Drawing;
 
 namespace BoardGameC_.Models
 {
-
+    public class CardManager
+    {
+        public Card[]? RedCards;
+        public Card[]? YellowCards;
+        public Card[]? BlueCards;
+        public Card[]? GreenCards;
+    }
     public class Card
     {
 
@@ -10,8 +16,9 @@ namespace BoardGameC_.Models
         public string AnswerA { get; set; }
         public string AnswerB { get; set; }
         public string AnswerC { get; set; }
-
         public char RightAns { get; set; }
+
+
         public Card(string initQuestion, string initA, string initB, string initC, char rightAns)
         {
             Question = initQuestion;
@@ -20,7 +27,8 @@ namespace BoardGameC_.Models
             AnswerC = initC;
             RightAns = rightAns;
         }
-
+        
+        public Card() {}
         public void DisplayCard(int boardRows, int boardColumns, ConsoleColor color)
         {
             int lineWidth = 3 * (boardColumns - 1) + 2;  // Total width for each line (including padding), each column 3 spaces, column 1 only 2 spaces;
@@ -29,8 +37,9 @@ namespace BoardGameC_.Models
             {
                 Console.BackgroundColor = color;
                 // Print a row of spaces (29 characters wide)
-                Console.WriteLine(new string(' ', lineWidth));
+                Console.Write(new string(' ', lineWidth));
                 Console.ResetColor();
+                Console.WriteLine(); // Finish the line with no colorP
             }
 
         }

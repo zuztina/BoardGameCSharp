@@ -1,0 +1,58 @@
+{
+  "cards": [
+    {
+      "question": "Který známý výrobek se dříve prodával pod názvy Bivoj, Perla nebo Mocca?",
+      "answers": {
+        "A": "Pribináček",
+        "B": "nanuk Míša",
+        "C": "Termix"
+      },
+      "rightAnswer": "A"
+    },
+    {
+      "question": "Tento sýr se vyrábí od roku 1995 v Plané nad Lužnicí, je polotvrdý a tvoří oka. Jak se jmenuje?",
+      "answers": {
+        "A": "Ementál",
+        "B": "Kamadet",
+        "C": "Madeland"
+      },
+      "rightAnswer": "C"
+    }, 
+    {
+      "question": "Ve známé říkance 'Vařila myšička kašičku' si ta nejmenší doběhla do komůrky na homolky. Čemu se říkávalo homolky?",
+      "answers": {
+        "A": "tvarůžkům",
+        "B": "koláčkům",
+        "C": "homolím cukru"
+      },
+      "rightAnswer": "A"
+    },
+    {
+      "question": "Dnes jsou lázeňské oplatky k dostání ve všech lázních i na mnoha jiných místech. Které město je ale jejich původní domovinou?",
+      "answers": {
+        "A": "Karlovy Vary",
+        "B": "Mariánské Lázně",
+        "C": "Františkovy lázně"
+      },
+      "rightAnswer": "A"
+    },
+    {
+      "question": "Jak se jmenuje cukrová hmota, která se dá snadno tvarovat a po vyschnutí ztvrdne a utvoří krustu?",
+      "answers": {
+        "A": "marcipán",
+        "B": "fondán",
+        "C": "glazé"
+      },
+      "rightAnswer": "B"
+    },
+    {
+      "question": "Kterému pokrmu se na Táborsku říká žahour?",
+      "answers": {
+        "A": "kapustovému karbanátku",
+        "B": "kysanému zelí",
+        "C": "ovocné kaši"
+      },
+      "rightAnswer": "B"
+    }
+  ]
+}

@@ -12,7 +12,7 @@ class Program
         int tries = 0;
         string? rules = string.Empty;  // Initialize rules
 
-        while (tries < 3)
+        while (tries < 2)
         {
             Console.WriteLine("Přejete si slyšet pravidla hry? [ano/ne]");
             rules = Console.ReadLine()?.Trim().ToLower();  // Handle possible extra spaces and make input lowercase
@@ -37,7 +37,7 @@ class Program
             }
         }
 
-        if (tries == 3)
+        if (tries == 2)
         {
             Console.WriteLine("Příliš mnoho pokusů. Program se ukončí.");
             Environment.Exit(0);  // End the program after three invalid attempts
@@ -48,7 +48,7 @@ class Program
     {
         // Player count initialization with validation
         int tries = 0;
-        while (tries < 3)
+        while (tries < 2)
         {
             Console.WriteLine("Prosím zadejte počet hráčů (2-6)...");
             playerCount = Convert.ToInt32(Console.ReadLine());
@@ -64,7 +64,7 @@ class Program
             }
         }
 
-        if (tries == 3)
+        if (tries == 2)
         {
             Console.WriteLine("Příliš mnoho pokusů. Program se ukončí.");
             Environment.Exit(0); // Ends the program
@@ -76,7 +76,7 @@ class Program
         {
             string nickname = string.Empty;
             tries = 0;
-            while (tries < 3)
+            while (tries < 2)
             {
                 Console.WriteLine($"Zadejte prosím jméno hráče {i + 1}");
                 nickname = Console.ReadLine()?.Trim();
@@ -93,7 +93,7 @@ class Program
                     tries++;
                 }
             }
-            if (tries == 3)
+            if (tries == 2)
             {
                 Console.WriteLine("Příliš mnoho pokusů. Program se ukončí.");
                 Environment.Exit(0); // Ends the program
@@ -105,15 +105,12 @@ class Program
     }
     static void Main(string[] args)
     {
-        Card tmp = new Card("This is a question that will be wrapped into multiple lines due to its length.", "A: totototototototot    toto je odpoved pro A", "B: toto je odpoved pro A", "C: toto je odpoved pro A", 'A');
-        //tmp.DisplayCard(8,10,ConsoleColor.Cyan);
+        /*tmp.DisplayCardQuestion(8,10,ConsoleColor.Cyan);
         Console.WriteLine();
-        tmp.DisplayCardQuestion(8,10,ConsoleColor.Cyan);
-        Console.WriteLine();
-        //tmp.DisplayCardAnswers(8,10,ConsoleColor.Cyan, false);
+        tmp.DisplayCardAnswers(8,10,ConsoleColor.Cyan, false);
         Console.WriteLine();
         Console.WriteLine("Stiskněte mezerník pro zobrazeni spravne odpovedi...");
-        // Wait for spacebar
+        //Wait for spacebar
             ConsoleKeyInfo key;
             do
             {
@@ -121,10 +118,14 @@ class Program
             } while (key.Key != ConsoleKey.Spacebar);
             Console.BackgroundColor = ConsoleColor.DarkGray;
         tmp.DisplayCardAnswers(8,10,ConsoleColor.Cyan, true);
+        */
         Program main = new Program();
         // basic game  initialization
         Console.WriteLine("Vítejte! Probíhá příprava hry...");
         Board MainBoard = new Board(8, 10);
+        Card tmp = new Card("This is a question that will be wrapped into multiple lines due to its length.", "A: totototototototot    toto je odpoved pro A", "B: toto je odpoved pro A", "C: toto je odpoved pro A", 'A');
+
+        Console.WriteLine();
         // display board when ready
         Console.WriteLine("Vše připraveno!");
         MainBoard.DisplayBoard();
@@ -146,9 +147,18 @@ class Program
         {
             Console.WriteLine($"current player before: {MainBoard.PlayerPool[i].Nickname} ");
             MainBoard.DisplayBoardPlayer(MainBoard.PlayerPool[i]);
-            MainBoard.MovePlayer(i);
-            Console.WriteLine($"current player after move: {MainBoard.PlayerPool[i].Nickname} ");
-            MainBoard.DisplayBoardPlayer(MainBoard.PlayerPool[i]);
+            int tmpRow = MainBoard.PlayerPool[i].Position.Item1;
+            int tmpColumn = MainBoard.PlayerPool[i].Position.Item2;
+            Console.WriteLine($"current player row: {tmpRow}, column: {tmpColumn}");
+            var tmpColor = MainBoard.BoardCells[tmpRow, tmpColumn].Color;
+            Console.WriteLine($"current cell color: {tmpColor}");
+            Console.WriteLine();
+            int boardHeight = MainBoard.Height;
+            int boardWidht = MainBoard.Width;
+            tmp.DisplayCard(boardHeight, boardWidht, Cell.ColorMap[tmpColor]);
+            //MainBoard.MovePlayer(i);
+            //Console.WriteLine($"current player after move: {MainBoard.PlayerPool[i].Nickname} ");
+            //MainBoard.DisplayBoardPlayer(MainBoard.PlayerPool[i]);
         }
         MainBoard.DisplayBoard();
     }

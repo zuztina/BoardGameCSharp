@@ -10,9 +10,10 @@ namespace BoardGameC_.Models
 
     public class Cell
     {
-
+        // color of the cell
         public Colors Color { get; private set; } // color of the cell from enum Colors
         public bool IsOccupied { get; private set; } // flag to determin if cell is currently occupised by a player
+        // cell position in a matrix 
         public int Row { get; private set; } // number of row in Board matrix
         public int Column { get; private set; } // number of column in Board matrix
 
@@ -46,10 +47,10 @@ namespace BoardGameC_.Models
             }
             Console.ResetColor();
         }
-
+        // current player display
         public virtual void DisplayPlayerPosition()
         {
-            Console.ForegroundColor = ConsoleColor.DarkMagenta;
+            Console.ForegroundColor = ConsoleColor.White;
             Console.BackgroundColor = ConsoleColor.DarkGray;
             string symbol = "⬤";
             if(Column==1){
@@ -74,7 +75,7 @@ namespace BoardGameC_.Models
             IsOccupied = !IsOccupied;
         }
 
-        private static readonly Dictionary<Colors, ConsoleColor> ColorMap = new() {
+        public static readonly Dictionary<Colors, ConsoleColor> ColorMap = new() {
             { Colors.Yellow, ConsoleColor.Yellow },
             { Colors.Blue, ConsoleColor.Cyan },
             { Colors.Red, ConsoleColor.DarkRed },

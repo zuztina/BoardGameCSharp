@@ -1,0 +1,58 @@
+{
+    "cards": [
+    {
+    "question": "Obsahuje nakrájená jablka a celer, vlašské ořechy, hroznové víno a majonézu. Podle kterého hotelu dostal tento salát název?",
+    "answers": {
+        "A": "Caesar",
+        "B": "Sheraton",
+        "C": "Waldorf"
+    },
+    "rightAnswer": "C"
+    },
+    {
+    "question": "Jak se nazývá pšeničná kapsa plněná nejčastěji masem a cibulí, vyhlášená zejména v Galicii, ale i jiných španělských oblastech?",
+    "answers": {
+        "A": "salchichon",
+        "B": "empanada",
+        "C": "escalivada"
+    },
+    "rightAnswer": "B"
+    }, 
+    {
+    "question": "Piccadilly je slavná ulice v Londýně. Které anglické potravině se však říká piccalilli?",
+    "answers": {
+        "A": "nakládané zelenině",
+        "B": "pálivé omáčce",
+        "C": "sýrovému dortu"
+    },
+    "rightAnswer": "A"
+    },
+    {
+    "question": "Jak se jmenuje mexické jídlo, ketré tvoří malá tortilla, která je naplňena směsí, většinou masovou?",
+    "answers": {
+        "A": "nachos",
+        "B": "tacos",
+        "C": "llanos"
+    },
+    "rightAnswer": "B"
+    },
+    {
+    "question": "Jídlo tureckého původu, které se vaří z rýže, masa, zeleniny a koření, dostalo název podle kameninového kotlíku. Jak se jmenuje?",
+    "answers": {
+        "A": "džuveč",
+        "B": "kebab",
+        "C": "perkelt"
+    },
+    "rightAnswer": "A"
+    },
+    {
+    "question": "Caldo verde je hustá polévka s kadeřávkem, klobásou a jinými ingrediencemi. Pro který evropský stát je typická?",
+    "answers": {
+        "A": "Portugalsko",
+        "B": "Itálii",
+        "C": "Francii"
+    },
+    "rightAnswer": "A"
+    }
+    ]
+}

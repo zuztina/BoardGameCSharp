@@ -1,0 +1,58 @@
+{
+    "cards": [
+    {
+    "question": "Jak se odborně nazývá kráva, která se poprvé otelila a může poté dávat mléko?",
+    "answers": {
+        "A": "prvotelka",
+        "B": "prvodojka",
+        "C": "prvomatka"
+    },
+    "rightAnswer": "A"
+    },
+    {
+    "question": "Která rostlina slouží k výrobě tequily?",
+    "answers": {
+        "A": "saguaro",
+        "B": "aloe",
+        "C": "agáve"
+    },
+    "rightAnswer": "C"
+    }, 
+    {
+    "question": "Pivo 12˚, vodka, bílé víno - který z těchto nápojů má nejmnéně kalorií na jeden litr?",
+    "answers": {
+        "A": "pivo",
+        "B": "vodka",
+        "C": "víno"
+    },
+    "rightAnswer": "A"
+    },
+    {
+    "question": "Podle kterého šlechtického rodu je pojmenováno pivo, které vaří pivovar Český Krumlov?",
+    "answers": {
+        "A": "podle Schwarzenbergů",
+        "B": "podle Rožumberků",
+        "C": "podle Eggenbergů"
+    },
+    "rightAnswer": "C"
+    },
+    {
+    "question": "Do roku 2000 měla Kofola ve svém logu kávové zrno. Za co bylo poté vyměněno?",
+    "answers": {
+        "A": "za koření hřebíček a kardamom",
+        "B": "za písmeno K",
+        "C": "za list lékořice"
+    },
+    "rightAnswer": "C"
+    },
+    {
+    "question": "Jak se nazývá internetová encyklopedie whisky?",
+    "answers": {
+        "A": "Whiskypedia",
+        "B": "The Whisky Chronicle",
+        "C": "Encysky"
+    },
+    "rightAnswer": "A"
+    }
+    ]
+}
