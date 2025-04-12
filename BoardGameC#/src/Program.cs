@@ -112,6 +112,14 @@ class Program
         Console.WriteLine();
         //tmp.DisplayCardAnswers(8,10,ConsoleColor.Cyan, false);
         Console.WriteLine();
+        Console.WriteLine("Stiskněte mezerník pro zobrazeni spravne odpovedi...");
+        // Wait for spacebar
+            ConsoleKeyInfo key;
+            do
+            {
+                key = Console.ReadKey(intercept: true); // Do not show key in console
+            } while (key.Key != ConsoleKey.Spacebar);
+            Console.BackgroundColor = ConsoleColor.DarkGray;
         tmp.DisplayCardAnswers(8,10,ConsoleColor.Cyan, true);
         Program main = new Program();
         // basic game  initialization

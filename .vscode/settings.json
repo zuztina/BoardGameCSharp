@@ -1,3 +1,23 @@
 {
-    "dotnet.defaultSolution": "BoardGameC#.sln"
+    "dotnet.defaultSolution": "BoardGameC#.sln",
+    "workbench.colorCustomizations": {
+        "activityBar.activeBackground": "#1b2da3",
+        "activityBar.background": "#1b2da3",
+        "activityBar.foreground": "#e7e7e7",
+        "activityBar.inactiveForeground": "#e7e7e799",
+        "activityBarBadge.background": "#db243c",
+        "activityBarBadge.foreground": "#e7e7e7",
+        "commandCenter.border": "#e7e7e799",
+        "sash.hoverBorder": "#1b2da3",
+        "statusBar.background": "#142177",
+        "statusBar.foreground": "#e7e7e7",
+        "statusBarItem.hoverBackground": "#1b2da3",
+        "statusBarItem.remoteBackground": "#142177",
+        "statusBarItem.remoteForeground": "#e7e7e7",
+        "titleBar.activeBackground": "#142177",
+        "titleBar.activeForeground": "#e7e7e7",
+        "titleBar.inactiveBackground": "#14217799",
+        "titleBar.inactiveForeground": "#e7e7e799"
+    },
+    "peacock.color": "#142177"
 }

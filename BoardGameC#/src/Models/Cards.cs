@@ -77,10 +77,11 @@ namespace BoardGameC_.Models
             }
             Console.WriteLine();
 
-            do
+            /*do
             {
                 key = Console.ReadKey(intercept: true); // Do not show key in console
             } while (key.Key != ConsoleKey.Spacebar);
+            */
             DisplayCardAnswers(boardRows, boardColumns, color, false);
             Console.ResetColor();
         }
@@ -100,6 +101,7 @@ namespace BoardGameC_.Models
             int lineNum = wrappedA.Count() + wrappedB.Count() + wrappedC.Count();
             int startRow = (totalRows - lineNum) / 2;  // Calculate starting row to center 
 
+            
             // Print blank lines before the question
             for (int i = 0; i < startRow; i++)
             {
