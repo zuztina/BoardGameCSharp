@@ -62,6 +62,66 @@ namespace BoardGameC_.Models
             Console.WriteLine($"Max Streak: {MaxStreak}");
         }
 
+        public void DisplayPlayerStats()
+        {
+            // Display the player's nickname and position
+            Console.WriteLine($"Jméno hráče: {Nickname}");
+            Console.WriteLine($"Nejdelší streak správných odpovědí: {MaxStreak}");
+            // Display the player's stats (cards and rights for each color category)
+            // Success percentage for each category
+            PrintCategoryStatistics("Modrá", BlueCards, BlueRight);
+            PrintCategoryStatistics("Červená", RedCards, RedRight);
+            PrintCategoryStatistics("Zelená", GreenCards, GreenRight);
+            PrintCategoryStatistics("Žlutá", YellowCards, YellowRight);
+        }
+
+        // Helper method to print the success percentage for a category
+        public void PrintCategoryStatistics(string category, int totalCards, int correctAnswers)
+        {
+            if (totalCards == 0)
+            {
+                Console.WriteLine($"{category} Category: No cards played yet.");
+                return;
+            }
+
+            double successPercentage = (double)correctAnswers / totalCards * 100;
+            Console.WriteLine($"{category} Kategorie:");
+            Console.WriteLine($"    Karty celkem: {totalCards}");
+            Console.WriteLine($"    Správné odpovědi: {correctAnswers}");
+            Console.WriteLine($"    úspěšnost: {successPercentage:F2}%");
+            Console.WriteLine();
+        }
+
+        public void DisplayPlayerStatsToFile(StreamWriter writer)
+        {
+            // Write the player's nickname and position
+            writer.WriteLine($"Jméno hráče: {Nickname}");
+            writer.WriteLine($"Nejdelší streak správných odpovědí: {MaxStreak}");
+
+            // Write the player's stats (cards and rights for each color category)
+            // Success percentage for each category
+            WriteCategoryStatisticsToFile(writer, "Modrá", BlueCards, BlueRight);
+            WriteCategoryStatisticsToFile(writer, "Červená", RedCards, RedRight);
+            WriteCategoryStatisticsToFile(writer, "Zelená", GreenCards, GreenRight);
+            WriteCategoryStatisticsToFile(writer, "Žlutá", YellowCards, YellowRight);
+        }
+
+        public void WriteCategoryStatisticsToFile(StreamWriter writer, string category, int totalCards, int correctAnswers)
+        {
+            if (totalCards == 0)
+            {
+                writer.WriteLine($"{category} Category: No cards played yet.");
+                return;
+            }
+
+            double successPercentage = (double)correctAnswers / totalCards * 100;
+            writer.WriteLine($"{category} Kategorie:");
+            writer.WriteLine($"    Karty celkem: {totalCards}");
+            writer.WriteLine($"    Správné odpovědi: {correctAnswers}");
+            writer.WriteLine($"    úspěšnost: {successPercentage:F2}%");
+            writer.WriteLine();
+        }
+
         public void UpdatePosition((int, int) newPosition, int newIndex)
         {
             Position = newPosition;

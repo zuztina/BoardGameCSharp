@@ -99,13 +99,12 @@ namespace BoardGameC_.Models
         }
         public void AddRedCells()
         {
-            Console.WriteLine($"posledno red: {Width-3}");
-                for (int j = 2; j < Width-2; j++)
-                {
-                        BoardCells[1, j] = new Cell(Colors.Red, 1, j);
-                        StartingPositions.Add((1, j));
-                }
-            
+            for (int j = 2; j < Width - 2; j++)
+            {
+                BoardCells[1, j] = new Cell(Colors.Red, 1, j);
+                StartingPositions.Add((1, j));
+            }
+
         }
 
         public void AddGreenCells()
@@ -143,46 +142,31 @@ namespace BoardGameC_.Models
         {
             return !string.IsNullOrEmpty(nickname) && !UniqueNicknames.Contains(nickname);
         }
-        public int FindNextPosition(int positionIndex)
+        public int FindNextPosition(int positionIndex, int direction)
         {
-            int maxPosition = StartingPositions.Count();
-            int forwardDistance = int.MaxValue;
-            int backwardDistance = int.MaxValue;
-            int forwardIndex = -1;
-            int backwardIndex = -1;
+            if (direction == 0)
+                throw new ArgumentException("Direction cannot be zero.");
 
-            for (int i = positionIndex + 1; i < maxPosition; i++)
+            int maxPosition = StartingPositions.Count;
+            int newIndex = positionIndex;
+
+            while (true)
             {
-                if (!OccupiedPositionIndex.Contains(i))
+                newIndex = (newIndex + direction + maxPosition) % maxPosition;
+
+                if (!OccupiedPositionIndex.Contains(newIndex))
                 {
-                    forwardDistance = i - positionIndex;
-                    forwardIndex = i;
+                    return newIndex;
+                }
+
+                // Stop if we looped around the entire board
+                if (newIndex == positionIndex)
+                {
                     break;
                 }
             }
-            for (int i = positionIndex - 1; i >= 0; i--)
-            {
-                if (!OccupiedPositionIndex.Contains(i))
-                {
-                    backwardDistance = positionIndex - i;
-                    backwardIndex = i;
-                    break;
-                }
-            }
 
-            // Decide which index to return
-            if (forwardDistance <= backwardDistance && forwardIndex != -1)
-            {
-                return forwardIndex;
-            }
-            else if (backwardIndex != -1)
-            {
-                return backwardIndex;
-            }
-
-            // If no index is available
-            throw new Exception("No available starting positions.");
-
+            throw new Exception("No available starting positions in that direction.");
         }
         public bool AddPlayer(string? nick)
         {
@@ -195,7 +179,7 @@ namespace BoardGameC_.Models
                 int randomIndex = random.Next(StartingPositions.Count);
                 var randomPosition = StartingPositions[randomIndex];
                 //check position occuapncy
-                Console.WriteLine($"random position index: {randomIndex}, position {randomPosition}");
+                //Console.WriteLine($"random position index: {randomIndex}, position {randomPosition}");
                 if (!OccupiedPositionIndex.Contains(randomIndex))
                 {
                     // create new player instance
@@ -206,22 +190,24 @@ namespace BoardGameC_.Models
                     // update cell to occupied and add index to occupancy list
                     UpdateCellOccupation(randomPosition.X, randomPosition.Y);
                     OccupiedPositionIndex.Add(randomIndex);
+                    DisplayBoardPlayer(tmpPlayer);
                     return true;
                 }
                 else
                 {
                     // find new position
-                    int tmpIndex = FindNextPosition(randomIndex);
+                    int tmpIndex = FindNextPosition(randomIndex, 1);
                     var tmpPosition = StartingPositions[tmpIndex];
-                    Console.WriteLine($"closest to random position index: {tmpIndex}, position {tmpPosition}");
+                    //Console.WriteLine($"closest to random position index: {tmpIndex}, position {tmpPosition}");
                     // create new player instance
                     Player tmpPlayer = new Player(nick, tmpPosition, randomIndex);
                     // add new Player to Pool
                     PlayerPool.Add(tmpPlayer);
-                    tmpPlayer.DisplayPlayer();
+                    //tmpPlayer.DisplayPlayer();
                     // update cell to occupied and add index to occupancy list
                     UpdateCellOccupation(tmpPosition.X, tmpPosition.Y);
                     OccupiedPositionIndex.Add(randomIndex);
+                    DisplayBoardPlayer(tmpPlayer);
                     return true;
                 }
             }
@@ -230,42 +216,36 @@ namespace BoardGameC_.Models
 
         public void MovePlayer(int playerIndex)
         {
-            Console.WriteLine($"occupied indexes");
-            foreach (var element in OccupiedPositionIndex)
-            {
-                Console.WriteLine(element);
-            }
             int moveIndex = DiceRoll();
-            int maxPosition = StartingPositions.Count();
-            // new index
-            int newIndex = PlayerPool[playerIndex].PositionIndex + moveIndex;
-            if (newIndex >= maxPosition)
+            Console.WriteLine("Jakým směrem po desce se chcete posunout? [L/P]");
+            string directionInput = Console.ReadLine()?.Trim().ToUpper();
+
+            if (string.IsNullOrEmpty(directionInput) || (directionInput[0] != 'L' && directionInput[0] != 'P'))
             {
-                newIndex = newIndex - maxPosition;
+                Console.WriteLine("Neplatný směr. Hráč zůstává na místě.");
+                return;
             }
-            // check position availibility
+
+            int direction = directionInput[0] == 'L' ? -1 : 1;
+            int maxPosition = StartingPositions.Count;
+
+            // Calculate new index with wrapping
+            int newIndex = (PlayerPool[playerIndex].PositionIndex + direction * moveIndex + maxPosition) % maxPosition;
+
+            // If position is occupied, find nearest available in given direction
             if (OccupiedPositionIndex.Contains(newIndex))
             {
-                // find new position
-                newIndex = FindNextPosition(newIndex);
-                Console.WriteLine($"closest to new position index after dice roll: {newIndex}");
-
+                newIndex = FindNextPosition(newIndex, direction);
+                Console.WriteLine($"Pozice obsazena. Nejbližší dostupná pozice: {newIndex}");
             }
+
+            // Move the player
             var newPosition = StartingPositions[newIndex];
-            Console.WriteLine($"old position index: {PlayerPool[playerIndex].PositionIndex}, position {StartingPositions[PlayerPool[playerIndex].PositionIndex]}");
-            Console.WriteLine($"new position index: {newIndex}, position {newPosition}");
-            //
-            Console.WriteLine("updating palyers postion...");
-            /*Console.WriteLine("old player status");
-            PlayerPool[playerIndex].DisplayPlayer();
-            */
             OccupiedPositionIndex.Remove(PlayerPool[playerIndex].PositionIndex);
-            // update old cell
             UpdateCellOccupation(PlayerPool[playerIndex].Position.Item1, PlayerPool[playerIndex].Position.Item2);
-            Console.WriteLine("new player status");
+
             PlayerPool[playerIndex].UpdatePosition(newPosition, newIndex);
-            //PlayerPool[playerIndex].DisplayPlayer();
-            // update new cell
+
             UpdateCellOccupation(PlayerPool[playerIndex].Position.Item1, PlayerPool[playerIndex].Position.Item2);
             OccupiedPositionIndex.Add(newIndex);
         }

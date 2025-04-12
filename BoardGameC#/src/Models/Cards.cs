@@ -1,13 +1,102 @@
 using System.Drawing;
+using System;
+using System.IO;
+using System.Text.Json;
+using System.Text.Json.Serialization;
+using System.Collections.Generic;
+
 
 namespace BoardGameC_.Models
 {
     public class CardManager
     {
-        public Card[]? RedCards;
-        public Card[]? YellowCards;
-        public Card[]? BlueCards;
-        public Card[]? GreenCards;
+        public Card[]? RedCards { get; private set; }
+        public Card[]? YellowCards { get; private set; }
+        public Card[]? BlueCards { get; private set; }
+        public Card[]? GreenCards { get; private set; }
+
+        public CardManager()
+        {
+            RedCards = LoadCardsFromJson("/home/tinka/C#Projekt/BoardGameC#/src/Cards/RedCards.json");
+            YellowCards = LoadCardsFromJson("/home/tinka/C#Projekt/BoardGameC#/src/Cards/YellowCards.json");
+            BlueCards = LoadCardsFromJson("/home/tinka/C#Projekt/BoardGameC#/src/Cards/BlueCards.json");
+            GreenCards = LoadCardsFromJson("/home/tinka/C#Projekt/BoardGameC#/src/Cards/GreenCards.json");
+        }
+        public Card[] LoadCardsFromJson(string filePath)
+        {
+            if (!File.Exists(filePath))
+            {
+                Console.WriteLine($"File not found: {filePath}");
+                return Array.Empty<Card>();
+            }
+
+            try
+            {
+                // Read the JSON data from the file
+                string jsonString = File.ReadAllText(filePath);
+
+                // Deserialize the JSON into a dynamic object (without additional classes)
+                var jsonDoc = JsonSerializer.Deserialize<JsonElement>(jsonString);
+
+                if (jsonDoc.ValueKind != JsonValueKind.Object || !jsonDoc.TryGetProperty("cards", out var cardsArray))
+                {
+                    Console.WriteLine("Invalid JSON format.");
+                    return Array.Empty<Card>();
+                }
+
+                // Create a list to hold the Card objects
+                List<Card> cards = new List<Card>();
+
+                // Iterate through the cards in the JSON array and map the data to Card objects
+                foreach (var cardElement in cardsArray.EnumerateArray())
+                {
+                    string question = cardElement.GetProperty("question").GetString();
+                    string answerA = cardElement.GetProperty("answers").GetProperty("A").GetString();
+                    string answerB = cardElement.GetProperty("answers").GetProperty("B").GetString();
+                    string answerC = cardElement.GetProperty("answers").GetProperty("C").GetString();
+                    char rightAns = cardElement.GetProperty("rightAnswer").GetString()[0];  // Assuming the right answer is a single letter
+
+                    // Create the Card object and add it to the list
+                    Card card = new Card(question, answerA, answerB, answerC, rightAns);
+                    cards.Add(card);
+                }
+
+                // Return the array of Card objects
+                Shuffle(cards);
+                return cards.ToArray();
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine($"Error loading cards: {ex.Message}");
+                return Array.Empty<Card>();
+            }
+        }
+        public void PrintAllCards(Card[] Category, ConsoleColor consoleColor, int width, int height)
+        {
+
+            foreach (Card card in Category)
+            {
+                Console.ResetColor();
+                card.DisplayCardQuestion(height, width, consoleColor);
+                Console.ResetColor();
+                card.DisplayAnswers(consoleColor);
+            }
+        }
+
+        public static void Shuffle<T>(List<T> list)
+        {
+            Random rng = new Random();
+            int n = list.Count;
+            while (n > 1)
+            {
+                n--;
+                int k = rng.Next(n + 1); // 0 <= k <= n
+                T temp = list[k];
+                list[k] = list[n];
+                list[n] = temp;
+            }
+        }
+
     }
     public class Card
     {
@@ -27,8 +116,8 @@ namespace BoardGameC_.Models
             AnswerC = initC;
             RightAns = rightAns;
         }
-        
-        public Card() {}
+
+
         public void DisplayCard(int boardRows, int boardColumns, ConsoleColor color)
         {
             int lineWidth = 3 * (boardColumns - 1) + 2;  // Total width for each line (including padding), each column 3 spaces, column 1 only 2 spaces;
@@ -39,147 +128,86 @@ namespace BoardGameC_.Models
                 // Print a row of spaces (29 characters wide)
                 Console.Write(new string(' ', lineWidth));
                 Console.ResetColor();
-                Console.WriteLine(); // Finish the line with no colorP
+                Console.WriteLine(); // Finish the line with no color
             }
 
         }
 
+        // Function to display the question on the card with the specified background color
         public void DisplayCardQuestion(int boardRows, int boardColumns, ConsoleColor color)
         {
-            int lineWidth = 3 * (boardColumns - 1) + 2;  // Total width for each line (including padding), each column 3 spaces, column 1 only 2 spaces
-            int padding = 2;     // Padding on both sides of the question
-            int contentWidth = lineWidth - 2 * padding;  // The content width, accounting for the padding
-            int totalRows = boardRows;   // Total number of rows for displaying the question
+            int lineWidth = 3 * (boardColumns - 1) + 2;  // Total width for each line (including padding)
+            int padding = 2;
+            int contentWidth = lineWidth - 2 * padding;  // Content width considering padding
+            int totalRows = boardRows;
 
-            List<string> wrappedQuestion = WrapTextToLines(Question, contentWidth);  // Wrap the question to fit the lines
-            int questionLines = wrappedQuestion.Count;  // Get the number of lines needed for the question
-            int startRow = (totalRows - questionLines) / 2;  // Calculate starting row to center the question
+            // Wrap the question text to fit the content width
+            List<string> wrappedQuestion = WrapTextToLines(Question, contentWidth);
+            int questionLines = wrappedQuestion.Count;
+            int startRow = (totalRows - questionLines) / 2;
 
-            Console.WriteLine("Stiskněte mezerník pro zobrazeni otazky a moznych odpovedi...");
-            Console.WriteLine();
+            // Display card background first
+            Console.WriteLine("Pro zobrazení otázky a odpovědí stikněte menezerník...");
             DisplayCard(boardRows, boardColumns, color);
-            Console.WriteLine();
+            Console.WriteLine();  // New line after the card background
             // Wait for spacebar
             ConsoleKeyInfo key;
             do
             {
                 key = Console.ReadKey(intercept: true); // Do not show key in console
             } while (key.Key != ConsoleKey.Spacebar);
-            Console.BackgroundColor = ConsoleColor.DarkGray;
-            // Print blank lines before the question
-            for (int i = 0; i < startRow; i++)
-            {
-                Console.WriteLine(new string(' ', lineWidth));  // Print the blank rows with padding
-            }
 
-            // Print the wrapped question
-            foreach (var line in wrappedQuestion)
-            {
-                string paddedLine = line.PadLeft(padding + line.Length).PadRight(lineWidth);  // Add padding on both sides
-                Console.WriteLine(paddedLine);  // Print the line with padding
-            }
+            // Print blank lines before the question
+            PrintBlankLines(startRow, lineWidth);
+
+            // Print wrapped question text on top of the background
+            PrintWrappedText(wrappedQuestion, padding, lineWidth, ConsoleColor.DarkGray);
 
             // Print blank lines after the question
-            for (int i = startRow + questionLines; i < totalRows; i++)
-            {
-                Console.WriteLine(new string(' ', lineWidth));  // Print the blank rows with padding
-            }
+            PrintBlankLines(totalRows - (startRow + questionLines), lineWidth);
+
+            // Reset the console colors after printing
+            Console.ResetColor();
             Console.WriteLine();
-
-            /*do
-            {
-                key = Console.ReadKey(intercept: true); // Do not show key in console
-            } while (key.Key != ConsoleKey.Spacebar);
-            */
-            DisplayCardAnswers(boardRows, boardColumns, color, false);
-            Console.ResetColor();
+            DisplayAnswers(color);
         }
 
-        public void DisplayCardAnswers(int boardRows, int boardColumns, ConsoleColor textColor, bool showAns)
+        // Function to print a specific number of blank lines with the specified line width
+        private void PrintBlankLines(int startRow, int lineWidth)
         {
-            int lineWidth = 3 * (boardColumns - 1) + 2;  // Total width for each line (including padding), each column 3 spaces, column 1 only 2 spaces
-            int padding = 2;     // Padding on both sides of the question
-            int contentWidth = lineWidth - 2 * padding;  // The content width, accounting for the padding
-            int totalRows = boardRows;   // Total number of rows for displaying the question
-
-            List<string> wrappedA = WrapTextToLines(AnswerA, contentWidth);
-            List<string> wrappedB = WrapTextToLines(AnswerB, contentWidth);
-            List<string> wrappedC = WrapTextToLines(AnswerC, contentWidth);
-            Console.BackgroundColor = ConsoleColor.DarkGray;
-            // Calculate the number of lines for the answers
-            int lineNum = wrappedA.Count() + wrappedB.Count() + wrappedC.Count();
-            int startRow = (totalRows - lineNum) / 2;  // Calculate starting row to center 
-
-            
-            // Print blank lines before the question
             for (int i = 0; i < startRow; i++)
             {
-                Console.WriteLine(new string(' ', lineWidth));  // Print the blank rows with padding
+                PrintBlankLine(lineWidth);
             }
-            // Print the wrapped question
-            foreach (var line in wrappedA)
-            {
-                if (RightAns == 'A' && showAns)
-                {
-                    Console.ForegroundColor = textColor;
-                    string paddedLine = line.PadLeft(padding + line.Length).PadRight(lineWidth);  // Add padding on both sides
-                    Console.WriteLine(paddedLine);  // Print the line with padding
-                    Console.ResetColor();
-                    Console.BackgroundColor = ConsoleColor.DarkGray;
-                }
-                else
-                {
-                    string paddedLine = line.PadLeft(padding + line.Length).PadRight(lineWidth);  // Add padding on both sides
-                    Console.WriteLine(paddedLine);  // Print the line with padding
-                }
-            }
-            // Print the wrapped question
-            foreach (var line in wrappedB)
-            {
-                if (RightAns == 'B'&& showAns)
-                {
-                    Console.ForegroundColor = textColor;
-                    string paddedLine = line.PadLeft(padding + line.Length).PadRight(lineWidth);  // Add padding on both sides
-                    Console.WriteLine(paddedLine);  // Print the line with padding
-                    Console.ResetColor();
-                    Console.BackgroundColor = ConsoleColor.DarkGray;
-                }
-                else
-                {
-                    string paddedLine = line.PadLeft(padding + line.Length).PadRight(lineWidth);  // Add padding on both sides
-                    Console.WriteLine(paddedLine);  // Print the line with padding
-                }
-            }
-            // Print the wrapped question
-            foreach (var line in wrappedC)
-            {
-                if (RightAns == 'C'&& showAns)
-                {
-                    Console.ForegroundColor = textColor;
-                    string paddedLine = line.PadLeft(padding + line.Length).PadRight(lineWidth);  // Add padding on both sides
-                    Console.WriteLine(paddedLine);  // Print the line with padding
-                    Console.ResetColor();
-                    Console.BackgroundColor = ConsoleColor.DarkGray;
-                }
-                else
-                {
-                    string paddedLine = line.PadLeft(padding + line.Length).PadRight(lineWidth);  // Add padding on both sides
-                    Console.WriteLine(paddedLine);  // Print the line with padding
-                }
-            }
-
-            // Print blank lines after the question
-            for (int i = startRow + lineNum; i < totalRows; i++)
-            {
-                Console.WriteLine(new string(' ', lineWidth));  // Print the blank rows with padding
-            }
-            Console.ResetColor();
         }
 
+        // Function to print a single blank line with the specified line width
+        private void PrintBlankLine(int lineWidth)
+        {
+            Console.BackgroundColor = ConsoleColor.DarkGray;
+            Console.Write(new string(' ', lineWidth));  // Print an empty line with the background color
+            Console.ResetColor();
+            Console.WriteLine(); // Finish the line with no color
+        }
+
+        // Function to print the wrapped question text on the card with proper padding and background color
+        private void PrintWrappedText(List<string> wrappedText, int padding, int lineWidth, ConsoleColor bgColor)
+        {
+            foreach (var line in wrappedText)
+            {
+                Console.BackgroundColor = bgColor;
+                string paddedLine = line.PadLeft(padding + line.Length).PadRight(lineWidth);
+                Console.Write(paddedLine);  // Print the line with padding and background color
+                Console.ResetColor();
+                Console.WriteLine(); // Finish the line with no color
+            }
+        }
+
+        // Function to wrap the question text to fit the available width
         public List<string> WrapTextToLines(string text, int maxLineWidth)
         {
             List<string> wrappedLines = new List<string>();
-            string[] words = text.Split(' ');  // Split the question into words
+            string[] words = text.Split(' ');
             string currentLine = "";
 
             foreach (var word in words)
@@ -206,7 +234,50 @@ namespace BoardGameC_.Models
             return wrappedLines;
         }
 
+        public void DisplayAnswers(ConsoleColor color)
+        {
+            // print the options
+            //a)
+            Console.ForegroundColor = color;
+            Console.Write("a)");
+            Console.ResetColor();
+            Console.WriteLine($" {AnswerA}");
+            //b)
+            Console.ForegroundColor = color;
+            Console.Write("b)");
+            Console.ResetColor();
+            Console.WriteLine($" {AnswerB}");
+            //c)
+            Console.ForegroundColor = color;
+            Console.Write("c)");
+            Console.ResetColor();
+            Console.WriteLine($" {AnswerC}");
+        }
+
+        public void DisplayRightAnswer(ConsoleColor color)
+        {
+            if (RightAns == 'A')
+            {
+                Console.Write($"Správná odpověď je za ");
+                Console.ForegroundColor = color;
+                Console.Write("a)");
+                Console.WriteLine($" {AnswerA}");
+                Console.ResetColor();
+            }
+            if (RightAns == 'B')
+            {
+                Console.ForegroundColor = color;
+                Console.Write("b)");
+                Console.WriteLine($" {AnswerB}");
+                Console.ResetColor();
+            }
+            if (RightAns == 'C')
+            {
+                Console.ForegroundColor = color;
+                Console.Write("c)");
+                Console.WriteLine($" {AnswerC}");
+                Console.ResetColor();
+            }
+        }
     }
-
-
 }

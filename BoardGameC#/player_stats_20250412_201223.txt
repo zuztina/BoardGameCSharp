@@ -1,0 +1,30 @@
+Vítězem je Adam
+
+Jméno hráče: Adam
+Nejdelší streak správných odpovědí: 7
+Modrá Kategorie:
+    Karty celkem: 2
+    Správné odpovědi: 2
+    úspěšnost: 100.00%
+
+Červená Kategorie:
+    Karty celkem: 1
+    Správné odpovědi: 1
+    úspěšnost: 100.00%
+
+Zelená Kategorie:
+    Karty celkem: 1
+    Správné odpovědi: 1
+    úspěšnost: 100.00%
+
+Žlutá Kategorie:
+    Karty celkem: 3
+    Správné odpovědi: 3
+    úspěšnost: 100.00%
+
+Jméno hráče: Eva
+Nejdelší streak správných odpovědí: 0
+Modrá Category: No cards played yet.
+Červená Category: No cards played yet.
+Zelená Category: No cards played yet.
+Žlutá Category: No cards played yet.
