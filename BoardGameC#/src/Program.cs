@@ -280,8 +280,8 @@ class Program
                 yellowCardIndex++;
             }
             // check if player didint win
-            if (currentPlayer.BlueRight >= 1 && currentPlayer.RedRight >= 1 &&
-                currentPlayer.YellowRight >= 1 && currentPlayer.GreenRight >= 1)
+            if (currentPlayer.BlueRight >= 4 && currentPlayer.RedRight >= 4 &&
+                currentPlayer.YellowRight >= 4 && currentPlayer.GreenRight >= 4)
             {
                 Console.WriteLine($"Hráč {currentPlayer.Nickname} vyhrál!");
                 if (currentPlayer.CurrentStreak > currentPlayer.MaxStreak)

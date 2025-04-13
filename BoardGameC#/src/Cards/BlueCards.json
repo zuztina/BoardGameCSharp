@@ -53,6 +53,62 @@
         "C": "Encysky"
     },
     "rightAnswer": "A"
-    }
+    },
+
+
+    {
+        "question": "Ve kterém typu nádoby zraje skotská whisky?",
+        "answers": {
+            "A": "ve dřevěných sudech",
+            "B": "v měnděných tancích",
+            "C": "v kamenných kádích"
+        },
+        "rightAnswer": "A"
+        },
+        {
+        "question": "Jak se nazývá Švejkův oblíbený, lehce slazený alkoholický nápoj vyráběný z vodky aromatizované anýzovou silicí?",
+        "answers": {
+            "A": "peprmintka",
+            "B": "kontušovka",
+            "C": "pastis"
+        },
+        "rightAnswer": "B"
+        }, 
+        {
+        "question": "Pokud má míchaný nápoj až tři deci, jak ho označujeme?",
+        "answers": {
+            "A": "short drink",
+            "B": "medium drink",
+            "C": "long drink"
+        },
+        "rightAnswer": "C"
+        },
+        {
+        "question": "Nahraďte českým slovem termín kupáž, se kterým se můžete setkat při výrobě vína?",
+        "answers": {
+            "A": "scelování",
+            "B": "kvašení",
+            "C": "čiření"
+        },
+        "rightAnswer": "C"
+        },
+        {
+        "question": "Které upozornění jste si mohli přečíst na vinětě ochucené minerálky Poděbradky v 70. letech?",
+        "answers": {
+            "A": "uložiti v temnu a chladu",
+            "B": "nevhodné pro těhotné ženy",
+            "C": "před použitím protřepat"
+        },
+        "rightAnswer": "C"
+        },
+        {
+        "question": "Podle španělské výlečné lodi, která se jmenovala El Calvador, získala paradoxně název typická francouzská...Doplňte druh nápoje.",
+        "answers": {
+            "A": "limonáda",
+            "B": "pálenka",
+            "C": "káva"
+        },
+        "rightAnswer": "A"
+        }
     ]
 }
