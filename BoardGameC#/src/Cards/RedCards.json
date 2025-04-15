@@ -1,67 +1,67 @@
 {
-  "cards": [
+"cards": [
     {
-      "question": "Který známý výrobek se dříve prodával pod názvy Bivoj, Perla nebo Mocca?",
-      "answers": {
+    "question": "Který známý výrobek se dříve prodával pod názvy Bivoj, Perla nebo Mocca?",
+    "answers": {
         "A": "Pribináček",
         "B": "nanuk Míša",
         "C": "Termix"
-      },
-      "rightAnswer": "A"
+    },
+    "rightAnswer": "A"
     },
     {
-      "question": "Tento sýr se vyrábí od roku 1995 v Plané nad Lužnicí, je polotvrdý a tvoří oka. Jak se jmenuje?",
-      "answers": {
+    "question": "Tento sýr se vyrábí od roku 1995 v Plané nad Lužnicí, je polotvrdý a tvoří oka. Jak se jmenuje?",
+    "answers": {
         "A": "Ementál",
         "B": "Kamadet",
         "C": "Madeland"
-      },
-      "rightAnswer": "C"
+    },
+    "rightAnswer": "C"
     }, 
     {
-      "question": "Ve známé říkance 'Vařila myšička kašičku' si ta nejmenší doběhla do komůrky na homolky. Čemu se říkávalo homolky?",
-      "answers": {
+    "question": "Ve známé říkance 'Vařila myšička kašičku' si ta nejmenší doběhla do komůrky na homolky. Čemu se říkávalo homolky?",
+    "answers": {
         "A": "tvarůžkům",
         "B": "koláčkům",
         "C": "homolím cukru"
-      },
-      "rightAnswer": "A"
+    },
+    "rightAnswer": "A"
     },
     {
-      "question": "Dnes jsou lázeňské oplatky k dostání ve všech lázních i na mnoha jiných místech. Které město je ale jejich původní domovinou?",
-      "answers": {
+    "question": "Dnes jsou lázeňské oplatky k dostání ve všech lázních i na mnoha jiných místech. Které město je ale jejich původní domovinou?",
+    "answers": {
         "A": "Karlovy Vary",
         "B": "Mariánské Lázně",
         "C": "Františkovy lázně"
-      },
-      "rightAnswer": "A"
+    },
+    "rightAnswer": "A"
     },
     {
-      "question": "Jak se jmenuje cukrová hmota, která se dá snadno tvarovat a po vyschnutí ztvrdne a utvoří krustu?",
-      "answers": {
+    "question": "Jak se jmenuje cukrová hmota, která se dá snadno tvarovat a po vyschnutí ztvrdne a utvoří krustu?",
+    "answers": {
         "A": "marcipán",
         "B": "fondán",
         "C": "glazé"
-      },
-      "rightAnswer": "B"
+    },
+    "rightAnswer": "B"
     },
     {
-      "question": "Kterému pokrmu se na Táborsku říká žahour?",
-      "answers": {
+    "question": "Kterému pokrmu se na Táborsku říká žahour?",
+    "answers": {
         "A": "kapustovému karbanátku",
         "B": "kysanému zelí",
         "C": "ovocné kaši"
-      },
-      "rightAnswer": "B"
+    },
+    "rightAnswer": "B"
     },
     {
-      "question": "Který produkt prochází při své výrobě například děličkou, vykulovači či vyvalovači?",
-      "answers": {
-          "A": "plísňový sýr",
-          "B": "chléb",
-          "C": "párek"
-      },
-      "rightAnswer": "B"
+    "question": "Který produkt prochází při své výrobě například děličkou, vykulovači či vyvalovači?",
+    "answers": {
+        "A": "plísňový sýr",
+        "B": "chléb",
+        "C": "párek"
+    },
+    "rightAnswer": "B"
     },
     {
         "question": "Ze kterého druhu škrobu se vyrábí solamyl?",
@@ -163,13 +163,13 @@
         "rightAnswer": "B"
     },
     {
-      "question": "Jak se jmenuje staročeský, ale i dnes oblíbený koláč z ovoce a loupaných obilek prosa?",
-      "answers": {
-          "A": "špadelník",
-          "B": "jáhelník",
-          "C": "poleník"
-      },
-      "rightAnswer": "B"
+    "question": "Jak se jmenuje staročeský, ale i dnes oblíbený koláč z ovoce a loupaných obilek prosa?",
+    "answers": {
+        "A": "špadelník",
+        "B": "jáhelník",
+        "C": "poleník"
+    },
+    "rightAnswer": "B"
     },
     {
         "question": "Čemu se říkávalo 'bába horká'?",
@@ -269,330 +269,6 @@
             "C": "mleté maso"
         },
         "rightAnswer": "B"
-    },
-    {
-      "question": "Kdo nebo co je český paličák?",
-      "answers": {
-          "A": "králík",
-          "B": "holub chovaný pro maso",
-          "C": "česnek"
-      },
-      "rightAnswer": "C"
-  },
-  {
-      "question": "Jak se říká hmotě ze sněhu a cukru, z níž se vyrábí cukroví pusinky?",
-      "answers": {
-          "A": "suflé",
-          "B": "bezé",
-          "C": "comté"
-      },
-      "rightAnswer": "B"
-  },
-  {
-      "question": "Které ovoce najdete uvnitř dortu zvaného kuba?",
-      "answers": {
-          "A": "jahodu",
-          "B": "ananas",
-          "C": "banán"
-      },
-      "rightAnswer": "C"
-  },
-  {
-      "question": "Jak jinak nazvete jednohubky neboli malé obložené plátky rohlíku nebo veky?",
-      "answers": {
-          "A": "otomanky",
-          "B": "fotelky",
-          "C": "kanapky"
-      },
-      "rightAnswer": "C"
-  },
-  {
-      "question": "Ze kterého druhu těsta se vyrábí kremrole?",
-      "answers": {
-          "A": "z kynutého",
-          "B": "z listového",
-          "C": "z lineckého"
-      },
-      "rightAnswer": "B"
-  },
-  {
-      "question": "O které potravině pojednává píseň Ivana Mládka, která začíná slovy: 'Když se mi v práci nedaří či trápí-li mě žena Kačenka...'?",
-      "answers": {
-          "A": "o špekáčku",
-          "B": "o tlačence",
-          "C": "o huspenině"
-      },
-      "rightAnswer": "B"
-  },
-  {
-      "question": "Která zelenina je v některých starých receptech psána jako luk nebo lenek?",
-      "answers": {
-          "A": "paprika",
-          "B": "petržel",
-          "C": "česnek"
-      },
-      "rightAnswer": "C"
-  },
-  {
-      "question": "Pokud obalujete řízky, do které části trojobalu je dáte jako první?",
-      "answers": {
-          "A": "do vajíčka",
-          "B": "do mouky",
-          "C": "do strouhanky"
-      },
-      "rightAnswer": "B"
-  },
-  {
-      "question": "Jak se jmenoval konzervační prostředek v prášku používaný před rokem 1989 při domácím zavařování marmelády?",
-      "answers": {
-          "A": "Fetol",
-          "B": "Letol",
-          "C": "Petol"
-      },
-      "rightAnswer": "C"
-  },
-  {
-      "question": "Jak se jmenuje tepelně neopracovaný salám s větším průměrem a vyšší kyselostí, při jehož výrobě se používá fermentace a uzení studeným kouřem?",
-      "answers": {
-          "A": "Herkules",
-          "B": "Vysočina",
-          "C": "Křemešník"
-      },
-      "rightAnswer": "A"
-  },
-  {
-      "question": "Který přívlastek má dnes klobása, která se začala vyrábět v martinovském masokombinátu počátkem 60. let?",
-      "answers": {
-          "A": "ostravská",
-          "B": "martinská",
-          "C": "moravská"
-      },
-      "rightAnswer": "A"
-  },
-  {
-      "question": "Ve kterém městě u nás najdete v místním klasicistním zámečku muzeum výroby cukru?",
-      "answers": {
-          "A": "v Libochovicích",
-          "B": "v Bruntálu",
-          "C": "v Dačicích"
-      },
-      "rightAnswer": "C"
-  },
-  {
-    "question": "Čím bývá nastavována nastavovaná bramborová kaše?",
-    "answers": {
-        "A": "hrachem",
-        "B": "ovesnými vločkami",
-        "C": "krupkami"
-    },
-    "rightAnswer": "C"
-  },
-  {
-    "question": "Čemu se říkalo komisárek?",
-    "answers": {
-        "A": "vojenskému chlebu",
-        "B": "mlýnku na maso",
-        "C": "náodbě na mléko"
-    },
-    "rightAnswer": "A"
-  },
-  {
-    "question": "Co se v potravinách nahrazuje látkou zvanou sorbitol?",
-    "answers": {
-        "A": "vitamin",
-        "B": "curk",
-        "C": "sůl"
-    },
-    "rightAnswer": "B"
-  },
-  {
-    "question": "Pohankové kaši se slaninou a cibulí se říká valašské... Doplňte název pokrmu.",
-    "answers": {
-        "A": "bělidlo",
-        "B": "žlutidlo",
-        "C": "černidlo"
-    },
-    "rightAnswer": "C"
-  },
-  {
-    "question": "Běžný typ chleba oválného tvaru se nazývá podle jednoho pohoří. Které to je?",
-    "answers": {
-        "A": "Pálava",
-        "B": "Vrchovina",
-        "C": "Šumava"
-    },
-    "rightAnswer": "C"
-  },
-  {
-    "question": "Jeden ze sýrů vyráběných v Jaroměřických mlékárnách se jmenuje stejně jako jeden bájný tvor. Který?",
-    "answers": {
-        "A": "Pegas",
-        "B": "Fénix",
-        "C": "Kentaur"
-    },
-    "rightAnswer": ""
-  },
-  {
-    "question": "Poznejte plodinu podle jejích českých odrůd: Benátčan, Džambul, Lumír, Tristan, Dukát.",
-    "answers": {
-        "A": "česnek",
-        "B": "květák",
-        "C": "pórek"
-    },
-    "rightAnswer": "A"
-  },
-  {
-    "question": "Které město je spjato s počátkem výroby Hermelínu?",
-    "answers": {
-        "A": "Přibyslav",
-        "B": "Soběslav",
-        "C": "Mladá Boleslav"
-    },
-    "rightAnswer": "A"
-  },
-  {
-    "question": "Která část hovězího masa se dělí na vrchní šál, spodní šál, květový šál, špičku, ořech a karabáček?",
-    "answers": {
-        "A": "plecko",
-        "B": "kýta",
-        "C": "bok"
-    },
-    "rightAnswer": "B"
-  },
-  {
-    "question": "Se kterým cechem je spojen symbol zvaný ferule?",
-    "answers": {
-        "A": "s rybářským",
-        "B": "s pekařským",
-        "C": "s řeznickým"
-    },
-    "rightAnswer": "A"
-  },
-  {
-    "question": "Jak se jmenuje žena, se kterou pojídal vařenou kapustu v textu své písně 'Co jsem měl dnes k obědu' Jiří Šlitr?",
-    "answers": {
-        "A": "Růžena",
-        "B": "Mařena",
-        "C": "Jiřina"
-    },
-    "rightAnswer": "B"
-  },
-  {
-    "question": "Jaké jsou podle mnoha receptů buchtičky, které se podávají se šodó?",
-    "answers": {
-        "A": "zlaťákové",
-        "B": "tolarové",
-        "C": "dukátové"
-    },
-    "rightAnswer": "C"
-  },
-  {
-    "question": "V některých receptech, zejména na různé moučníky, se můžete setkat s pojmem maizena. Co to je?",
-    "answers": {
-        "A": "kukuřičná moučka",
-        "B": "sušené vejce",
-        "C": "strouhaná jablka"
-    },
-    "rightAnswer": "A"
-  },
-  {
-    "question": "Jak se říká druhému a předposlednímu krajíci chleba vedle patky?",
-    "answers": {
-        "A": "sirotek",
-        "B": "zápatčí",
-        "C": "škramfulec"
-    },
-    "rightAnswer": "B"
-  },
-  {
-    "question": "Jak se říkalo praženým mřenkám mramorovaným, které bývaly běžně k dostání na trzích?",
-    "answers": {
-        "A": "pečenáče",
-        "B": "krusty",
-        "C": "grundle"
-    },
-    "rightAnswer": "C"
-  },
-  {
-    "question": "Jak bývá v restauracích označován houskový knedlík, do něhož jsou přidávány petrželová nať a muškátový oříšek?",
-    "answers": {
-        "A": "karlovarský",
-        "B": "pražský",
-        "C": "moravský"
-    },
-    "rightAnswer": "A"
-  },
-  {
-    "question": "Jak se jmenuje firma sídlící v Havlíčkově Brodu, která vyrábí pudinkové prášky, solamyl nebo knedlíky v prášku?",
-    "answers": {
-        "A": "Amylon",
-        "B": "Naturvita",
-        "C": "Natura"
-    },
-    "rightAnswer": "A"
-  },
-  {
-    "question": "Jak se jmenuje jedlá a chutná houba, která je známa pod jménem boltcovitka bezová nebo černá houba?",
-    "answers": {
-        "A": "Jidášovo ucho",
-        "B": "smrž",
-        "C": "babka"
-    },
-    "rightAnswer": ""
-  },
-  {
-    "question": "Recept na pardubický perník pochází původně z jiného města. Z kterého?",
-    "answers": {
-        "A": "Nové Město nad Metují",
-        "B": "Hradec Králové",
-        "C": "Jičín"
-    },
-    "rightAnswer": "B"
-  },
-  {
-    "question": "Čemu k snědku se na Chodsku říká roháč?",
-    "answers": {
-        "A": "bramborovému knedlíku",
-        "B": "velkému koláči",
-        "C": "jelenímu guláši"
-    },
-    "rightAnswer": "B"
-  },
-  {
-    "question": "„Bůček, ovar, sádlo, nákyp, párky, svíčková či husí paštika, čokoláda, dorty, buchty, škvarky, tohleto mně už nic neříká.“ Od kterého zpěváka známe tento text?",
-    "answers": {
-        "A": "od Michala Tučného",
-        "B": "od Jarka Nohavici",
-        "C": "od Jiřího Suchého"
-    },
-    "rightAnswer": "A"
-  },
-  {
-    "question": "V obci Choustník v jižních Čechách stojí nejen zajímavý hrad, ale také výrobna chipsů. Které značky?",
-    "answers": {
-        "A": "Chio",
-        "B": "Bohemia",
-        "C": "Damodara"
-    },
-    "rightAnswer": "B"
-  },
-  {
-    "question": "Doplňte název delší kořeněné uzeniny: trampské...",
-    "answers": {
-        "A": "brčko",
-        "B": "koleno",
-        "C": "cigáro"
-    },
-    "rightAnswer": "C"
-  },
-  {
-    "question": "Ve kterém roce byl na území Československa vyroben první ovocný jogurt?",
-    "answers": {
-        "A": "1921",
-        "B": "1933",
-        "C": "1949"
-    },
-    "rightAnswer": "B"
-  }  
-  ]
+    }
+    ]
 }
