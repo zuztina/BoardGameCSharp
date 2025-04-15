@@ -83,6 +83,7 @@ namespace BoardGameC_.Models
             }
         }
 
+        // https://stackoverflow.com/questions/273313/randomize-a-listt
         public static void Shuffle<T>(List<T> list)
         {
             Random rng = new Random();
@@ -90,13 +91,12 @@ namespace BoardGameC_.Models
             while (n > 1)
             {
                 n--;
-                int k = rng.Next(n + 1); // 0 <= k <= n
+                int k = rng.Next(n + 1); 
                 T temp = list[k];
                 list[k] = list[n];
                 list[n] = temp;
             }
-        }
-
+        } 
     }
     public class Card
     {
@@ -118,35 +118,35 @@ namespace BoardGameC_.Models
         }
 
 
+        // display solid color matrix as a back of the card
         public void DisplayCard(int boardRows, int boardColumns, ConsoleColor color)
         {
-            int lineWidth = 3 * (boardColumns - 1) + 2;  // Total width for each line (including padding), each column 3 spaces, column 1 only 2 spaces;
+            int lineWidth = 3 * (boardColumns - 1) + 2;  // Total width for each line (including padding), each column 3 spaces, 1. column  only 2 spaces;
             int rows = boardRows;
             for (int i = 0; i < rows; i++)
             {
                 Console.BackgroundColor = color;
-                // Print a row of spaces (29 characters wide)
+                // Print a row of spaces (29 characters wide - for 8x10 matrix)
                 Console.Write(new string(' ', lineWidth));
                 Console.ResetColor();
                 Console.WriteLine(); // Finish the line with no color
             }
-
         }
 
-        // Function to display the question on the card with the specified background color
+        // Function to display the question on the card with specified background color
         public void DisplayCardQuestion(int boardRows, int boardColumns, ConsoleColor color)
         {
             int lineWidth = 3 * (boardColumns - 1) + 2;  // Total width for each line (including padding)
             int padding = 2;
-            int contentWidth = lineWidth - 2 * padding;  // Content width considering padding
+            int contentWidth = lineWidth - 2 * padding;  // line(text) width considering padding
             int totalRows = boardRows;
 
-            // Wrap the question text to fit the content width
+            // prepare the question lines and a starting row
             List<string> wrappedQuestion = WrapTextToLines(Question, contentWidth);
             int questionLines = wrappedQuestion.Count;
             int startRow = (totalRows - questionLines) / 2;
 
-            // Display card background first
+            // Display card back first
             Console.WriteLine("Pro zobrazení otázky a odpovědí stikněte menezerník...");
             DisplayCard(boardRows, boardColumns, color);
             Console.WriteLine();  // New line after the card background
@@ -159,10 +159,8 @@ namespace BoardGameC_.Models
 
             // Print blank lines before the question
             PrintBlankLines(startRow, lineWidth);
-
-            // Print wrapped question text on top of the background
+            // Print question
             PrintWrappedText(wrappedQuestion, padding, lineWidth, ConsoleColor.DarkGray);
-
             // Print blank lines after the question
             PrintBlankLines(totalRows - (startRow + questionLines), lineWidth);
 
@@ -172,22 +170,16 @@ namespace BoardGameC_.Models
             DisplayAnswers(color);
         }
 
-        // Function to print a specific number of blank lines with the specified line width
+        // print a specific number of blank lines with the specified line width
         private void PrintBlankLines(int startRow, int lineWidth)
         {
             for (int i = 0; i < startRow; i++)
             {
-                PrintBlankLine(lineWidth);
+                Console.BackgroundColor = ConsoleColor.DarkGray;
+                Console.Write(new string(' ', lineWidth));  // Print an empty line with the background color
+                Console.ResetColor();
+                Console.WriteLine(); // Finish the line with no color
             }
-        }
-
-        // Function to print a single blank line with the specified line width
-        private void PrintBlankLine(int lineWidth)
-        {
-            Console.BackgroundColor = ConsoleColor.DarkGray;
-            Console.Write(new string(' ', lineWidth));  // Print an empty line with the background color
-            Console.ResetColor();
-            Console.WriteLine(); // Finish the line with no color
         }
 
         // Function to print the wrapped question text on the card with proper padding and background color
@@ -206,17 +198,19 @@ namespace BoardGameC_.Models
         // Function to wrap the question text to fit the available width
         public List<string> WrapTextToLines(string text, int maxLineWidth)
         {
+            // list of individual lines of text
             List<string> wrappedLines = new List<string>();
+            // split the text to words
             string[] words = text.Split(' ');
             string currentLine = "";
 
             foreach (var word in words)
             {
-                // If adding this word exceeds the max line width, start a new line
+                // adding this word exceeds the max line width, start a new line
                 if (currentLine.Length + word.Length + (currentLine.Length > 0 ? 1 : 0) > maxLineWidth)
                 {
-                    wrappedLines.Add(currentLine);  // Add the current line to the list
-                    currentLine = word;  // Start a new line with the current word
+                    wrappedLines.Add(currentLine);  // Add current line to the list
+                    currentLine = word;  // Start a new line with current word
                 }
                 else
                 {
@@ -226,8 +220,7 @@ namespace BoardGameC_.Models
                     currentLine += word;
                 }
             }
-
-            // Add the last line if there's any remaining text
+            // Add the last line 
             if (!string.IsNullOrEmpty(currentLine))
                 wrappedLines.Add(currentLine);
 

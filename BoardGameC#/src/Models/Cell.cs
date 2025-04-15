@@ -5,7 +5,7 @@ using System.Runtime.CompilerServices;
 namespace BoardGameC_.Models
 
 {
-
+    // possible cell colors
     public enum Colors { Yellow, Blue, Red, Green, None }
 
     public class Cell
@@ -17,7 +17,6 @@ namespace BoardGameC_.Models
         public int Row { get; private set; } // number of row in Board matrix
         public int Column { get; private set; } // number of column in Board matrix
 
-
         public Cell(Colors initColor = Colors.Red, int initRow = 0, int initColumn = 0)
         {
             Color = initColor;
@@ -25,7 +24,7 @@ namespace BoardGameC_.Models
             Column = initColumn;
             IsOccupied = false;
         }
-
+        
         public virtual void Display()
         {
             Console.ForegroundColor = ColorMap[Color];
@@ -74,7 +73,7 @@ namespace BoardGameC_.Models
         {
             IsOccupied = !IsOccupied;
         }
-
+        
         public static readonly Dictionary<Colors, ConsoleColor> ColorMap = new() {
             { Colors.Yellow, ConsoleColor.Yellow },
             { Colors.Blue, ConsoleColor.Cyan },

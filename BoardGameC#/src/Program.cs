@@ -40,7 +40,6 @@ class Program
                 tries++;  // Increment tries if the answer is invalid
             }
         }
-
         if (tries == 2)
         {
             Console.WriteLine("Příliš mnoho pokusů. Program se ukončí.");
@@ -67,14 +66,12 @@ class Program
                 tries++;
             }
         }
-
         if (tries == 2)
         {
             Console.WriteLine("Příliš mnoho pokusů. Program se ukončí.");
             Environment.Exit(0); // Ends the program
             return false;
         }
-
         // Adding players to the pool and setting starting positions
         for (int i = 0; i < playerCount; i++)
         {
@@ -85,7 +82,6 @@ class Program
                 Console.WriteLine($"Zadejte prosím jméno hráče {i + 1}");
                 nickname = Console.ReadLine()?.Trim();
                 bool validPlayer = MainBoard.AddPlayer(nickname);
-
                 if (validPlayer)
                 {
                     //Console.WriteLine($"Hráč {nickname} úspěšně přidán...");
@@ -104,7 +100,6 @@ class Program
                 return false;
             }
         }
-
         return true;
     }
 
@@ -124,7 +119,6 @@ class Program
         string answer = Console.ReadLine()?.Trim().ToUpper();
         // Display the right answer
         tmp.DisplayRightAnswer(color);
-
         // Check if the answer is correct
         return tmp.RightAns == answer[0];
     }
@@ -134,7 +128,7 @@ class Program
         string dateTime = DateTime.Now.ToString("yyyyMMdd_HHmmss");
 
         // Specify the file path with the date and time in the name
-        string filePath = $"player_stats_{dateTime}.txt";
+        string filePath = $"BoardGameC#/gameStats/player_stats_{dateTime}.txt";
 
         // Create a StreamWriter to write to the file
         using (StreamWriter writer = new StreamWriter(filePath))
@@ -149,7 +143,6 @@ class Program
                 currentPlayer.DisplayPlayerStatsToFile(writer);
             }
         }
-
         Console.WriteLine($"Stats have been exported to {filePath}.");
     }
 
