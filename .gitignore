@@ -1,9 +1,9 @@
 # Build results
-bin/
-obj/
+BoardGameC#/bin/
+BoardGameC#/obj/
 
 # Visual Studio Code
 .vscode/
 
-#cardDatabase
-/BoardGameC#/Cards
+#card database
+BoardGameC#/src/Cards/ 
